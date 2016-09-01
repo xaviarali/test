@@ -1,0 +1,646 @@
+@import url(https://fonts.googleapis.com/css?family=El+Messiri);
+body
+{
+    background: url("../img/bg.jpg") fixed;
+    /*background-position: 30% 30%;*/
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+}
+
+.wrap
+{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    /*position: absolute;*/
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+p.form-title
+{
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+form.login
+{
+    left: 60px;
+    margin: 5% 0;
+    /*margin: 3%;
+    padding: 2%;
+    /*margin: 0 auto;*/
+
+    /*background: rgba(128, 128, 128, 0.62) none repeat scroll 0 0;
+    border-radius: 8px;
+    box-shadow: 1px 1px 50px rgba(128, 128, 128, 0.36);
+    color: #999999;
+    overflow: hidden;*/
+}
+
+form.login input[type="text"], form.login input[type="password"]
+{
+    background: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+    border-bottom: 3px solid #ebebeb;
+}
+.modal-body input[type="text"], .modal-body input[type="password"]
+{
+    background: #fff!important;
+    color: #000!important;
+}
+form.login input[type="submit"]
+{
+    width: 100%;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 16px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+form.login input[type="submit"]:hover
+{
+    transition: background-color 0.5s ease;
+}
+form.login .remember-forgot
+{
+    float: left;
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+form.login .forgot-pass-content
+{
+    min-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+form.login label, form.login a
+{
+    font-size: 100%;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+form.login a
+{
+    transition: color 0.5s ease;
+}
+
+form.login a:hover
+{
+    color: #2580db;
+}
+
+.pr-wrap
+{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: none;
+}
+
+.show-pass-reset
+{
+    display: block !important;
+}
+
+
+
+.input-group .icon-addon .form-control {
+    border-radius: 0;
+}
+.form-control {
+    border-radius: 0px!important;
+    box-shadow:0 0 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+.icon-addon {
+    position: relative;
+    color: #555;
+    display: block;
+}
+
+.icon-addon:after,
+.icon-addon:before {
+    display: table;
+    content: " ";
+}
+
+.icon-addon:after {
+    clear: both;
+}
+
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon,
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding: 10px 0;
+    top: 1px
+}
+
+.icon-addon.addon-lg .form-control {
+    line-height: 1.33;
+    height: 46px;
+    font-size: 18px;
+    padding: 10px 16px 10px 40px;
+}
+
+.icon-addon.addon-sm .form-control {
+    height: 30px;
+    padding: 5px 10px 5px 28px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.icon-addon.addon-lg .fa,
+.icon-addon.addon-lg .glyphicon {
+    font-size: 18px;
+    margin-left: 0;
+    left: 11px;
+    top: 4px;
+}
+
+.icon-addon.addon-md .form-control,
+.icon-addon .form-control {
+    padding-left: 30px;
+    float: left;
+    font-weight: normal;
+}
+
+.icon-addon.addon-sm .fa,
+.icon-addon.addon-sm .glyphicon {
+    margin-left: 0;
+    font-size: 12px;
+    left: 5px;
+    top: -1px
+}
+
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon,
+.icon-addon .form-control:focus + .fa,
+.icon-addon:hover .fa {
+    color: #2580db;
+}
+.verticalLine {
+    left: 10px;
+    top:5px;
+    border-left: 1px solid #ebebeb;
+    height: 40px;
+}
+
+/*Home CSS*/
+.mail-box {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.mail-box aside {
+    display: table-cell;
+    float: none;
+    height: 100%;
+    padding: 0;
+    vertical-align: top;
+}
+.mail-box .sm-side {
+    background: none repeat scroll 0 0 #F3F8FB;
+    border-radius: 4px 0 0 4px;
+    width: 25%;
+}
+.mail-box .lg-side {
+    background: none repeat scroll 0 0 #fff;
+    border-radius: 0 4px 4px 0;
+    width: 75%;
+}
+.mail-box .sm-side .user-head {
+    background: none repeat scroll 0 0 #65B2F8;
+    border-radius: 4px 0 0;
+    color: #fff;
+    min-height: 80px;
+    padding: 10px;
+}
+.user-head .inbox-avatar {
+    float: left;
+    width: 65px;
+}
+.user-head .inbox-avatar img {
+    border-radius: 4px;
+}
+.user-head .user-name {
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+.user-head .user-name h5 {
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+.user-head .user-name h5 a {
+    color: #fff;
+}
+.user-head .user-name span a {
+    color: #87e2e7;
+    font-size: 12px;
+}
+a.mail-dropdown {
+    background: none repeat scroll 0 0 #80d3d9;
+    border-radius: 2px;
+    color: #01a7b3;
+    font-size: 10px;
+    margin-top: 20px;
+    padding: 3px 5px;
+}
+.inbox-body {
+    background: none repeat scroll 0 0 #EDF3F7;
+    padding: 20px;
+    min-height: 550px;
+}
+.btn-compose {
+    background: none repeat scroll 0 0 #ff6c60;
+    color: #fff;
+    padding: 12px 0;
+    text-align: center;
+    width: 100%;
+}
+.btn-compose:hover {
+    background: none repeat scroll 0 0 #f5675c;
+    color: #fff;
+}
+ul.inbox-nav {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.inbox-divider {
+    border-bottom: 1px solid #d5d8df;
+}
+ul.inbox-nav li {
+    display: inline-block;
+    line-height: 45px;
+    width: 100%;
+}
+ul.inbox-nav li a {
+    color: #6a6a6a;
+    display: inline-block;
+    line-height: 45px;
+    padding: 0 20px;
+    width: 100%;
+}
+ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
+    background: none repeat scroll 0 0 #d5d7de;
+    color: #6a6a6a;
+}
+ul.inbox-nav li a i {
+    color: #6a6a6a;
+    font-size: 16px;
+    padding-right: 10px;
+}
+ul.inbox-nav li a span.label {
+    margin-top: 13px;
+}
+ul.labels-info li h4 {
+    color: #5c5c5e;
+    font-size: 13px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    text-transform: uppercase;
+}
+ul.labels-info li {
+    margin: 0;
+}
+ul.labels-info li a {
+    border-radius: 0;
+    color: #6a6a6a;
+}
+ul.labels-info li a:hover, ul.labels-info li a:focus {
+    background: none repeat scroll 0 0 #d5d7de;
+    color: #6a6a6a;
+}
+ul.labels-info li a i {
+    padding-right: 10px;
+}
+.nav.nav-pills.nav-stacked.labels-info p {
+    color: #9d9f9e;
+    font-size: 11px;
+    margin-bottom: 0;
+    padding: 0 22px;
+}
+.inbox-head {
+    background: none repeat scroll 0 0 #41475C;
+    border-radius: 0 4px 0 0;
+    color: #fff;
+    min-height: 80px;
+    padding: 8px;
+}
+.inbox-head a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.inbox-head h3 {
+    display: inline-block;
+    font-weight: 300;
+    margin: 0;
+    padding-top: 6px;
+}
+.inbox-head .sr-input {
+    border: medium none;
+    border-radius: 4px 0 0 4px;
+    box-shadow: none;
+    color: #8a8a8a;
+    float: left;
+    height: 40px;
+    padding: 0 10px;
+}
+.inbox-head .sr-btn {
+    background: none repeat scroll 0 0 #00a6b2;
+    border: medium none;
+    border-radius: 0 4px 4px 0;
+    color: #fff;
+    height: 40px;
+    padding: 0 20px;
+}
+.table-inbox {
+    border: 1px solid #d3d3d3;
+    margin-bottom: 0;
+}
+.table-inbox tr td {
+    padding: 12px !important;
+}
+.table-inbox tr td:hover {
+    cursor: pointer;
+}
+.table-inbox tr td .fa-star.inbox-started, .table-inbox tr td .fa-star:hover {
+    color: #f78a09;
+}
+.table-inbox tr td .fa-star {
+    color: #d5d5d5;
+}
+.table-inbox tr.unread td {
+    background: none repeat scroll 0 0 #f7f7f7;
+    font-weight: 600;
+}
+ul.inbox-pagination {
+    float: right;
+}
+ul.inbox-pagination li {
+    float: left;
+}
+.mail-option {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.mail-option .chk-all, .mail-option .btn-group {
+    margin-right: 5px;
+}
+.mail-option .chk-all, .mail-option .btn-group a.btn {
+    background: none repeat scroll 0 0 #fcfcfc;
+    border: 1px solid #e7e7e7;
+    border-radius: 3px !important;
+    color: #afafaf;
+    display: inline-block;
+    padding: 5px 10px;
+}
+.inbox-pagination a.np-btn {
+    background: none repeat scroll 0 0 #fcfcfc;
+    border: 1px solid #e7e7e7;
+    border-radius: 3px !important;
+    color: #afafaf;
+    display: inline-block;
+    padding: 5px 15px;
+}
+.mail-option .chk-all input[type="checkbox"] {
+    margin-top: 0;
+}
+.mail-option .btn-group a.all {
+    border: medium none;
+    padding: 0;
+}
+.inbox-pagination a.np-btn {
+    margin-left: 5px;
+}
+.inbox-pagination li span {
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 7px;
+}
+.fileinput-button {
+    background: none repeat scroll 0 0 #eeeeee;
+    border: 1px solid #e6e6e6;
+}
+.inbox-body .modal .modal-body input, .inbox-body .modal .modal-body textarea {
+    border: 1px solid #e6e6e6;
+    box-shadow: none;
+}
+.btn-send, .btn-send:hover {
+    background: none repeat scroll 0 0 #00a8b3;
+    color: #fff;
+}
+.btn-send:hover {
+    background: none repeat scroll 0 0 #009da7;
+}
+.modal-header h4.modal-title {
+    font-family: "Open Sans",sans-serif;
+    font-weight: 300;
+}
+.modal-body label {
+    font-family: "Open Sans",sans-serif;
+    font-weight: 400;
+}
+.heading-inbox h4 {
+    border-bottom: 1px solid #ddd;
+    color: #444;
+    font-size: 18px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+.sender-info {
+    margin-bottom: 20px;
+}
+.sender-info img {
+    height: 30px;
+    width: 30px;
+}
+.sender-dropdown {
+    background: none repeat scroll 0 0 #eaeaea;
+    color: #777;
+    font-size: 10px;
+    padding: 0 3px;
+}
+.view-mail a {
+    color: #ff6c60;
+}
+.attachment-mail {
+    margin-top: 30px;
+}
+.attachment-mail ul {
+    display: inline-block;
+    margin-bottom: 30px;
+    width: 100%;
+}
+.attachment-mail ul li {
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 150px;
+}
+.attachment-mail ul li img {
+    width: 100%;
+}
+.attachment-mail ul li span {
+    float: right;
+}
+.attachment-mail .file-name {
+    float: left;
+}
+.attachment-mail .links {
+    display: inline-block;
+    width: 100%;
+}
+
+.fileinput-button {
+    float: left;
+    margin-right: 4px;
+    overflow: hidden;
+    position: relative;
+}
+.fileinput-button input {
+    cursor: pointer;
+    direction: ltr;
+    font-size: 23px;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-300px, 0px) scale(4);
+}
+.fileupload-buttonbar .btn, .fileupload-buttonbar .toggle {
+    margin-bottom: 5px;
+}
+.files .progress {
+    width: 200px;
+}
+.fileupload-processing .fileupload-loading {
+    display: block;
+}
+* html .fileinput-button {
+    line-height: 24px;
+    margin: 1px -3px 0 0;
+}
+* + html .fileinput-button {
+    margin: 1px 0 0;
+    padding: 2px 15px;
+}
+@media (max-width: 767px) {
+    .files .btn span {
+        display: none;
+    }
+    .files .preview * {
+        width: 40px;
+    }
+    .files .name * {
+        display: inline-block;
+        width: 80px;
+        word-wrap: break-word;
+    }
+    .files .progress {
+        width: 20px;
+    }
+    .files .delete {
+        width: 60px;
+    }
+}
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+.logo_tag {
+    top:10px;
+    left: 60px;
+}
+.logo_tag img {
+    margin-left: 10px;
+
+}
+.logo_tag p {
+    font-family: 'El Messiri', sans-serif;
+    color: #fff;
+    font-weight: bold;
+    font-size: 22px;
+    text-justify: inter-word;
+    text-align: center;
+    font-style: italic;
+    margin-top: 5px;
+}
+.user-profile-link {
+    float: right;
+    margin-right: 5px;
+}
+.user-profile-link img {
+    margin-left: 5px;
+}
+.ds-btn li{ list-style:none; float:left; padding:10px; }
+.ds-btn li a span{padding-left:15px;padding-right:5px;width:100%;display:inline-block; text-align:left;}
+.ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
+
+.box {
+    padding: 60px 75px !important;
+}
+.break {
+    margin-top: 100px;
+}
+.alert {
+    display: none;
+}
+#signup .form-control {
+    margin-bottom: 0px;
+}
+ul, li
+{
+    list-style-type: none;
+}
+
+.modal-body {
+    background:grey;
+}
+.modal-body input {
+    color: #ccc;
+}
+.table td, .table th {
+    text-align: center;
+}
+.modal-body {
+    color: #ddd;
+}

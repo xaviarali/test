@@ -1,0 +1,16 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00b7ff;
+}
+tr.head {
+  background-color: #d3d3d3;
+}
+tr.odd {
+  background-color: #ffffe0;
+}
+td {
+  min-width: 200px;
+}

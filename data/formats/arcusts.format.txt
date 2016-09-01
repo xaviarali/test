@@ -1,0 +1,41 @@
+384
+cvt 6 shipToCode
+cvt 6 billToCode
+cvt 30 customerName
+cvt 30 address1
+cvt 30 address2
+cvt 30 address3
+cvt 14 postalCode
+cvt 14 phoneNumber
+cvt 3
+cvt 30
+cvt 3
+cvt 2
+cvi 2
+cvt 8
+cvt 8
+cvt 8
+cvt 4
+cvt 1
+cvt 1
+cvt 3
+cvt 30
+cvt 30
+cvd 8
+cvi 2
+cvl 4
+cvl 4
+cvi 2
+cvl 4
+cvi 2
+cvl 4
+cvl 4
+cvl 4
+cvt 14
+cvi 2
+cvl 4
+cvl 4
+cvl 4
+cvl 4
+cvb 1
+cvl 4

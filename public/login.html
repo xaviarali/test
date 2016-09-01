@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oneir - Login</title>
+
+    <!-- Lib -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="css/custom.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="wrap">
+                <form class="col-md-3 col-md-offset-1 login" id="signin">
+                    <div class="alert alert-success"></div>
+                    <div class="alert alert-danger"></div>
+                    <p id="mheading" class="form-title">Sign In</p>
+                    <div class="form-group">
+                        <div class="icon-addon addon-md">
+                            <input type="text" placeholder="Username" class="form-control" id="username"
+                                   name="username" pattern=".{4,}" required title="4 characters minimum">
+                            <label for="username" class="fa fa-user" rel="tooltip" title="Username"></label>
+                        </div>
+                    </div>
+                     <div id="moptions"></div>
+                    <div id="passdiv" class="form-group">
+                        <div class="icon-addon addon-md">
+                            <input type="password" placeholder="Password" class="form-control" id="password"
+                                   name="password" pattern=".{8,}"  required title="8 characters minimum">
+                            <label for="password" class="fa fa-lock" rel="tooltip" title="Password"></label>
+                        </div>
+                    </div>
+                    <div id="reme" class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input  name="remember" type="checkbox" value="Remember Me"> Remember Me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <input id="sbutton" type="submit" value="Sign In" class="btn btn-primary btn-lg"/>
+                    <div class="clearfix"></div>
+                    <!--<div class="remember-forgot">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-5 col-xs-5 forgot-pass-content">
+                                <a href="signup.html">Need an Account?</a>
+                            </div>
+                            <div class="verticalLine col-md-1 col-xs-1 col-sm-1 "></div>
+                            <div class="col-md-5 col-sm-5 col-xs-5 forgot-pass-content">
+                                <a href="javascript:void(0)">Forgot Password?</a>
+                            </div>
+                        </div>
+                    </div>!-->
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="break"></div>
+    <div class="row">
+        <div class="col-md-5 logo_tag">
+            <div class="col-md-3">
+                <img src="img/logo.jpg" style="max-width: 120px" alt="logo">
+            </div>
+            <div class="col-md-9">
+                <p>
+                    Oneir Solutions Inc<br>
+                    Making Businesses More Competitive…<br>
+                    Today and Tomorrow!
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/master.js"></script>
+<script src="js/signin.js"></script>
+</body>
+</html>

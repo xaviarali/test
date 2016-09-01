@@ -1,0 +1,37 @@
+extends layout
+
+
+block content
+  a(href='/def/invent.format.txt') Binary format definition( parsing instruction)
+  h1 inventho.rnd
+
+  hr
+  p= "Calculated sum of 'Retail Price' using Python as extension: " + total
+  hr
+  if data
+     div.data
+       p Showing parsed data from <b>"inventho.rnd"</b> file
+         br
+       table
+         tr(class='head')
+          td(width='400px')= "Update"
+           each val, index in data[0]
+            td(width='400px')= index
+          - var cls = 'even'
+          - var index = 1
+          each row in data
+            tr(class= cls)
+              td(width='400px')
+                a(href='/inventory/detail/' +index) Edit
+              each val, index in row
+                td(width='400px')= val
+
+            - index++
+            if cls== 'even'
+              - cls= 'odd'
+            else
+              - cls= 'even'
+  else
+    div.data
+      p.
+        Can't parse data

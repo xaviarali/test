@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  a(href='/def/arcusts.format.txt') Binary format definition( parsing instruction)
+  h1 arcusts.rnd
+
+  if data
+     div.data
+       p.
+        Showing parsed data from <b>"arcusts.rnd"</b> file
+       table
+         tr(class='head')
+           each val, index in data[0]
+            td(width='400px')= index
+          - var cls = 'even'
+          each row in data
+            tr(class= cls)
+              each val, index in row
+                td(width='400px')= val
+            if cls== 'even'
+              - cls= 'odd'
+            else
+              - cls= 'even'
+  else
+    div.data
+      p.
+        Can't parse data
