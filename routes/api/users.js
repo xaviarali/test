@@ -47,7 +47,7 @@ router.delete('/:username', function(req, res, next) {
         return;
     }
 
-    if( username == 'administrator'){
+    if( username == 'admin'){
         res.status(400).send("administrator user cannot be deleted");
         return;
     }

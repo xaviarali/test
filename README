@@ -14,7 +14,7 @@ How to run
 3. run `ps -el | grep node`
 4. Find the process number
 5. kill the process.
-6. run 'nohup nohup node bin/www &'
+6. run 'nohup node bin/www &'
 
 
 Database Setup

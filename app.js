@@ -102,8 +102,8 @@ var us = require('./services/api/UserService');
 us.add(
     {
       "name":"ADMINISTRATOR"
-      , "username":"adminstrator"
-      , "password":sha256.x2("OneIrIs#1!")
+      , "username":"admin"
+      , "password":sha256.x2("password")
       , "admin":true
       , "passwordChangeNeeded":true
     },
