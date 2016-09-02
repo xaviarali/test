@@ -6,24 +6,41 @@ var options = {
               };
 
 
-var subItems = {
-                'GL' : ["Update chart of accounts.", "Post to general journal.", "Display account status.", "Set up special accounts.", "Set up budget accounts.", "Prepare bank reconciliation.", "Close fiscal period.", "Carry out year end closing.", "General ledger utilities menu.", "General ledger reports..."],
-                'AR' : ["Add, update or delete customers.", "Post (manually prepared) invoices and credit notes.", "Receive payments from customers.", "Display customers' account status.", "Print customer statements and post finance charges.", "Set up customer credit on hold.", "Remove paid invoices from A/R ledger.", "Set up terms, types, salesreps, contact action codes.", "Set up special customer pricing table.", "Accounts receivable utilities menu.", "Accounts receivable reports..."],
-			    'AP' : ["Add, update or delete vendors", "Post vendor invoices and debit notes", "Make payments to selected vendors", "Prepare cash disbursements", "Display vendors account status", "Print accounts payable cheques.", "Remove paid invoices from A/P ledger.", "Accounts payable utilities menu.", "Accounts payable reports..."],
+var L1 = {
+                'GL' : ["Update chart of accounts.", "Post to general journal.", "Display account status.", "Set up special accounts.", "Set up budget accounts.", "Prepare bank reconciliation.", "Close fiscal period.", "Carry out year end closing.", "General ledger utilities menu.", "General ledger reports."],
+                'AR' : ["Add, update or delete customers.", "Post (manually prepared) invoices and credit notes.", "Receive payments from customers.", "Display customers' account status.", "Print customer statements and post finance charges.", "Set up customer credit on hold.", "Remove paid invoices from A/R ledger.", "Set up terms, types, salesreps, contact action codes.", "Set up special customer pricing table.", "Accounts receivable utilities menu.", "Accounts receivable reports."],
+			    'AP' : ["Add, update or delete vendors", "Post vendor invoices and debit notes", "Make payments to selected vendors", "Prepare cash disbursements", "Display vendors account status", "Print accounts payable cheques.", "Remove paid invoices from A/P ledger.", "Accounts payable utilities menu.", "Accounts payable reports."],
 			    'PO' : ["Prepare purchase orders.", "Generate purchase orders.", "Receive and/or invoice stock.", "Print purchase orders.", "Purchase order utilities menu", "Purchase order reports..."],
 				'JC' : [], 
-				'IV' : ["Prepare sales & invoices.", "Prepare credit notes", "Prepare quotations.", "Print slips,quotes,performae", "Print invoices,credit notes", "Process groups of invoices", "Generate work orders", "Special customer pricing table.", "Special inventory pricing table.", "Sales orders utilities menu.", "Sales Order Report Menu"],
-				'PS' : ["Make sales.", "Print clerk 'X' and grand 'Z' totals", "Remove posted point of sale invoices", "Special customer pricing table", "Special inventory pricing table.", "Point of sale utilities menu.", "Point of sale reports..."],
+				'IV' : ["Prepare sales orders and invoices.", "Prepare credit notes.", "Prepare quotations.", "Print pick pack slips, confirmations, quotes, proformae.", "Print invoices, credit notes and shipping labels.", "Process groups of invoices.", "Generate work orders.", "Set up special customer pricing table.", "Set up special inventory pricing table.", "Sales orders utilities menu.", "Sales orders reports."],
+				'PS' : ["Make sales.", "Print clerk 'X' and grand 'Z' totals", "Remove posted point of sale invoices", "Special customer pricing table", "Special inventory pricing table.", "Point of sale utilities menu.", "Point of sale reports."],
 				'PR' : [],
 				'BM' : ["Add, update or delete bill of materials.","Add, update or delete schedule.","One step production.","Materials requirements planning.","Go to the bill of materials utilities menu.","Print the bill of materials listing.","Print shop orders.","Print production planning report.","Print bill of materials job listing."],
 				'SA' : ["Print Inventory Transaction Report.", "Print Sales Analysis by Product.", "Print Sales Analysis by Product Line.", "Print Sales Analysis by Customer.", "Print Sales Analysis by Territory.","Print Sales Analysis by Salesrep.","Print Sales Analysis by Supplier.","Print Sales Analysis with Year Comparisons.","Print Inventory List Price Change Report.","Purge Sales Analysis History","Sales History Data Mining.","Velocity Report."],
 				'PT' : [],
 				'CB' : [],
 				'RB' : ["Add, update or delete contracts.", "Enter meter readings.", "Process billing cycle.", "Print repetitive billing invoices.", "Print proformae invoices.", "Enter extra billings.", "Set up contract types.", "Remove cancelled contracts.", "Print contract listing.", "Print usage follow up sheet."],
-				'IN' : ["Add, update or delete inventory items.", "Adjust inventory.", "Interdivisonal stock transfer.", "Display inventory product status.", "Adjust selling prices.", "Stocktaking menu.", "Set up Mix and Match.", "Set up Tag Along.", "Set up Kitting.", "Critical stock level transfer.", "Inventory management utilities menu.", "Inventory management reports..."]
-              };				
-
-			  
+				'IN' : ["Add, update or delete inventory items.", "Adjust inventory.", "Interdivisonal stock transfer.", "Display inventory product status.", "Adjust selling prices.", "Stocktaking menu.", "Set up Mix and Match.", "Set up Tag Along.", "Set up Kitting.", "Critical stock level transfer.", "Inventory management utilities menu.", "Inventory management reports."]
+              };
+var L2 = {	
+				//'IV1' : [],
+				//'IV2' : [],
+				//'IV3' : [],
+				//'IV4' : [],
+				//'IV5' : [],
+				//'IV6' : [],
+				//'IV7' : [],
+                //'IV9' : [],
+                //'IV10' : [],
+    'AR11' : ['Print the customer master listing.','Print the customer accounts receivable ledger.','Print the aged accounts receivable report.','Print receivable collection report.','Print the sales register and profit commission report.','Print the sales journal.','Print the cash receipts journal.','Print the cash deposit slip.','Print the sales analysis reports.','Print the annual sales figures.','Print the customer memo and client contact reports.','Print labels.'],  
+    'IV11' : ['Print the sales orders booked report.','Print the outstanding sales orders report.','Print the quotation report.','Print the shipping schedule.','Print the Order Guide.','Print the sales register and profit commission report.','Print the special customer pricing report.','Print the special inventory pricing report.'],  
+     'PS7' : ['Print the receipts detail report.','Print the cash receipts journal.','Print the cash deposit slip.','Print the transaction detail report.','Print the sales register and profit commission report.','Print the sales journal.','Print the layaway transactions report.','Print the rental transactions report.',"Print the special customer pricing report.","Print the special inventory pricing report."],
+		};	  
+		
+var L3 = {
+	        'IV101' : ['AAAA','BBBB','CCCC'],
+			'IV111' : ['YYYY','QQQQ','XXXX']
+         };			  
 $(function(){
 
        $.get("login_check",function(data){ 
@@ -45,26 +62,86 @@ $(function(){
     
        
     }); 
-    
+//
+// START OF MENU LEVELS ADDING FUNCTIONS
+// 
 
 function template(item,id,code)
-{
+{   
+    // LEVEL 1
      var temp = "";
-     temp += "<a id=\"m"+id+"\" href=\"#" + id + "\" class=\"list-group-item list-group-item-success strong\" data-toggle=\"collapse\" data-parent=\"#item\">"+item+"<i class=\"fa fa-caret-down\"></i></a>";
-     temp += "<div class=\"collapse\" id=\""+id+"\">";
-	// bindEventListeners('#m'+id,id+','+0+','+sessionId);
-     if( subItems[code] != null)
+     temp += templateHeader(code+'x',code,item,'menu');
+	 temp += startofCascadingItemsBlock(code);
+	 
+     if( L1[code] != null)
 	 {
-         for(var i = 0,len = subItems[code].length; i < len; i++)
+         for(var i = 0,len = L1[code].length; i < len; i++)
          {
-	         temp += "<a id=\""+ id + "s" + i + "\" href=\"#\" class=\"list-group-item\">"+subItems[code][i]+"</a>";
-			// bindEventListeners('#'+(i+1)+'s'+i,id+','+(i+1)+','+sessionId);
-         }
+			 // if submenu has submenu
+			 if(L2[code+(i+1)] != null)
+			 {	 
+		         temp += subMenuHeader(code+(i+1)+'x',code+(i+1),L1[code][i],code);
+                 temp += subMenuDiv(code+(i+1));		 		 
+			     for(var k = 0,xlen = L2[code+(i+1)].length; k < xlen; k++)
+			    {
+				     temp += addNewsubMenuOption(code+(i+1)+''+k,L2[code+(i+1)][k],code+(i+1));
+					
+			    }
+			     temp += endofCascadingItemsBlock();
+             }
+			 else
+			 {
+				 temp += addNewMenuOption(code+(i+1),L1[code][i],code);
+			 }
+	    }
 	 }
-	  temp += "</div>";
+	  temp += endofCascadingItemsBlock();
 	 return temp;
-}
+ }
 
+/*****
+* Helper functions for adding Menu Items and Levels
+******/
+function templateHeader(id,ref,item,dataparent='')
+{
+	return "<a id=\""+id+"\" href=\"#" + ref + "\" class=\"list-group-item list-group-item-success strong\" data-toggle=\"collapse\" data-parent=\"#"+dataparent+"\">"+item+"<i class=\"fa fa-caret-down\"></i></a>";  
+}
+/*****
+* Helper functions for adding Menu Items and Levels
+******/
+function addNewMenuOption(id,item,dataparent)
+{
+	return "<a id=\""+ id + "\" href=\"#\" class=\"list-group-item\" data-parent=\"#"+dataparent+"\">"+item+"</a>";
+}
+function addNewsubMenuOption(id,item,dataparent)
+{
+	return "<a id=\""+ id + "\" href=\"#\" class=\"list-group-item\" data-parent=\"#"+dataparent+"\">"+' --'+item+"</a>";
+}
+/*****
+* Helper functions for adding Menu Items and Levels
+******/
+function startofCascadingItemsBlock(id)
+{
+	return "<div class=\"collapse\" id=\""+id+"\">"; 
+}
+/*****
+* Helper functions for adding Menu Items and Levels
+******/
+function endofCascadingItemsBlock()
+{
+	return "</div>"; 
+}
+function subMenuDiv(id)
+{
+	return "<div class=\"collapse list-group-submenu\" id=\""+id+"\">"; 
+}
+function subMenuHeader(id,ref,item,dataparent='')
+{
+	return "<a id=\""+id+"\" href=\"#" + ref + "\" class=\"list-group-item strong\" data-toggle=\"collapse\" data-parent=\"#"+dataparent+"\">"+item+"<i class=\"fa fa-caret-down\"></i></a>";  
+}
+//
+// END OF MENU LEVELS ADDING FUNCTIONS
+//list-group-item strong
 function xtemplate(item,id)
 {
     return "<li id=\""+ id +"\"><a href=\"#\"><i class=\"fa fa-list-alt\"></i>"+item+"</a></li>";
@@ -144,15 +221,16 @@ function getMenu()
                     var m = data.split(" ");
                      var html = "";
                    for(var i = 0; i < m.length-1; i++)
+					  //for(var i = 0; i < 1; i++)
                   {
                       html += template(options[m[i]],i+1,m[i]);
                   }
                  $("#menu").html(html);
 	   		      for(var k = 0; k < m.length-1; k++)
                  {
-                     if( subItems[m[k]] != null)
+                     if( L1[m[k]] != null)
 	                {
-                         for(var i = 0,len = subItems[m[k]].length; i < len; i++)
+                         for(var i = 0,len = L1[m[k]].length; i < len; i++)
 					     {
 	                          bindEventListeners('#'+(k+1)+'s'+i,(k+1)+','+(i+1)+','+sessionId);
 	                     }
