@@ -7,39 +7,44 @@ var options = {
 
 
 var L1 = {
-                'GL' : ["Update chart of accounts.", "Post to general journal.", "Display account status.", "Set up special accounts.", "Set up budget accounts.", "Prepare bank reconciliation.", "Close fiscal period.", "Carry out year end closing.", "General ledger utilities menu.", "General ledger reports."],
-                'AR' : ["Add, update or delete customers.", "Post (manually prepared) invoices and credit notes.", "Receive payments from customers.", "Display customers' account status.", "Print customer statements and post finance charges.", "Set up customer credit on hold.", "Remove paid invoices from A/R ledger.", "Set up terms, types, salesreps, contact action codes.", "Set up special customer pricing table.", "Accounts receivable utilities menu.", "Accounts receivable reports."],
-			    'AP' : ["Add, update or delete vendors", "Post vendor invoices and debit notes", "Make payments to selected vendors", "Prepare cash disbursements", "Display vendors account status", "Print accounts payable cheques.", "Remove paid invoices from A/P ledger.", "Accounts payable utilities menu.", "Accounts payable reports."],
-			    'PO' : ["Prepare purchase orders.", "Generate purchase orders.", "Receive and/or invoice stock.", "Print purchase orders.", "Purchase order utilities menu", "Purchase order reports..."],
-				'JC' : [], 
-				'IV' : ["Prepare sales orders and invoices.", "Prepare credit notes.", "Prepare quotations.", "Print pick pack slips, confirmations, quotes, proformae.", "Print invoices, credit notes and shipping labels.", "Process groups of invoices.", "Generate work orders.", "Set up special customer pricing table.", "Set up special inventory pricing table.", "Sales orders utilities menu.", "Sales orders reports."],
-				'PS' : ["Make sales.", "Print clerk 'X' and grand 'Z' totals", "Remove posted point of sale invoices", "Special customer pricing table", "Special inventory pricing table.", "Point of sale utilities menu.", "Point of sale reports."],
-				'PR' : [],
-				'BM' : ["Add, update or delete bill of materials.","Add, update or delete schedule.","One step production.","Materials requirements planning.","Go to the bill of materials utilities menu.","Print the bill of materials listing.","Print shop orders.","Print production planning report.","Print bill of materials job listing."],
-				'SA' : ["Print Inventory Transaction Report.", "Print Sales Analysis by Product.", "Print Sales Analysis by Product Line.", "Print Sales Analysis by Customer.", "Print Sales Analysis by Territory.","Print Sales Analysis by Salesrep.","Print Sales Analysis by Supplier.","Print Sales Analysis with Year Comparisons.","Print Inventory List Price Change Report.","Purge Sales Analysis History","Sales History Data Mining.","Velocity Report."],
-				'PT' : [],
-				'CB' : [],
-				'RB' : ["Add, update or delete contracts.", "Enter meter readings.", "Process billing cycle.", "Print repetitive billing invoices.", "Print proformae invoices.", "Enter extra billings.", "Set up contract types.", "Remove cancelled contracts.", "Print contract listing.", "Print usage follow up sheet."],
-				'IN' : ["Add, update or delete inventory items.", "Adjust inventory.", "Interdivisonal stock transfer.", "Display inventory product status.", "Adjust selling prices.", "Stocktaking menu.", "Set up Mix and Match.", "Set up Tag Along.", "Set up Kitting.", "Critical stock level transfer.", "Inventory management utilities menu.", "Inventory management reports."]
-              };
+          'GL' : ["Update chart of accounts.", "Post to general journal.", "Display account status.", "Set up special accounts.", "Set up budget accounts.", "Prepare bank reconciliation.", "Close fiscal period.", "Carry out year end closing.", "General ledger utilities menu.", "General ledger reports."],
+          'AR' : ["Add, update or delete customers.", "Post (manually prepared) invoices and credit notes.", "Receive payments from customers.", "Display customers' account status.", "Print customer statements and post finance charges.", "Set up customer credit on hold.", "Remove paid invoices from A/R ledger.", "Set up terms, types, salesreps, contact action codes.", "Set up special customer pricing table.", "Accounts receivable utilities menu.", "Accounts receivable reports."],
+          'AP' : ["Add, update or delete vendors", "Post vendor invoices and debit notes", "Make payments to selected vendors", "Prepare cash disbursements", "Display vendors account status", "Print accounts payable cheques.", "Remove paid invoices from A/P ledger.", "Accounts payable utilities menu.", "Accounts payable reports."],
+		  'PO' : ["Prepare purchase orders.", "Generate purchase orders.", "Receive and/or invoice stock.", "Print purchase orders.", "Purchase order utilities menu", "Purchase order reports."],
+	      'JC' : ["Add, update or delete jobs.","Charge labour to jobs.","Charge materials to jobs.","Adjust job purchases.","Display and invoice jobs.","Credit jobs.","Print invoices.","Job utility menu.","Job reports."], 
+		  'IV' : ["Prepare sales orders and invoices.", "Prepare credit notes.", "Prepare quotations.", "Print pick pack slips, confirmations, quotes, proformae.", "Print invoices, credit notes and shipping labels.", "Process groups of invoices.", "Generate work orders.", "Set up special customer pricing table.", "Set up special inventory pricing table.", "Sales orders utilities menu.", "Sales orders reports."],
+          'PS' : ["Make sales.", "Print clerk 'X' and grand 'Z' totals", "Remove posted point of sale invoices", "Special customer pricing table", "Special inventory pricing table.", "Point of sale utilities menu.", "Point of sale reports."],
+		  'PR' : ["Employee menu.","Time tickets menu.","Payroll processing menu.","Print payroll cheques.","Year end processing menu.","Payroll utilities menu.","Payroll reports."],
+	      'BM' : ["Add, update or delete bill of materials.","Add, update or delete schedule.","One step production.","Materials requirements planning.","Go to the bill of materials utilities menu.","Print the bill of materials listing.","Print shop orders.","Print production planning report.","Print bill of materials job listing."],
+          'SA' : ["Print Inventory Transaction Report.", "Print Sales Analysis by Product.", "Print Sales Analysis by Product Line.", "Print Sales Analysis by Customer.", "Print Sales Analysis by Territory.","Print Sales Analysis by Salesrep.","Print Sales Analysis by Supplier.","Print Sales Analysis with Year Comparisons.","Print Inventory List Price Change Report.","Purge Sales Analysis History","Sales History Data Mining.","Velocity Report."],
+ 		  'PT' : ["Add, update or delete jobs.","Charge labour to jobs.","Charge materials to jobs.","Adjust job purchases.","Display and invoice jobs.","Credit jobs.","Print invoices.","Job utility menu.","Job reports."], 
+	      'CB' : ["Add, update or delete jobs.","Charge labour to jobs.","Charge materials to jobs.","Adjust job purchases.","Display and invoice jobs.","Credit jobs.","Print invoices.","Job utility menu.","Job reports."], 
+	      'RB' : ["Add, update or delete contracts.", "Enter meter readings.", "Process billing cycle.", "Print repetitive billing invoices.", "Print proformae invoices.", "Enter extra billings.", "Set up contract types.", "Remove cancelled contracts.", "Print contract listing.", "Print usage follow up sheet."],
+	      'IN' : ["Add, update or delete inventory items.", "Adjust inventory.", "Interdivisonal stock transfer.", "Display inventory product status.", "Adjust selling prices.", "Stocktaking menu.", "Set up Mix and Match.", "Set up Tag Along.", "Set up Kitting.", "Critical stock level transfer.", "Inventory management utilities menu.", "Inventory management reports."]
+         };
+
+
 var L2 = {	
-				//'IV1' : [],
-				//'IV2' : [],
-				//'IV3' : [],
-				//'IV4' : [],
-				//'IV5' : [],
-				//'IV6' : [],
-				//'IV7' : [],
-                //'IV9' : [],
-                //'IV10' : [],
-    'AR11' : ['Print the customer master listing.','Print the customer accounts receivable ledger.','Print the aged accounts receivable report.','Print receivable collection report.','Print the sales register and profit commission report.','Print the sales journal.','Print the cash receipts journal.','Print the cash deposit slip.','Print the sales analysis reports.','Print the annual sales figures.','Print the customer memo and client contact reports.','Print labels.'],  
-    'IV11' : ['Print the sales orders booked report.','Print the outstanding sales orders report.','Print the quotation report.','Print the shipping schedule.','Print the Order Guide.','Print the sales register and profit commission report.','Print the special customer pricing report.','Print the special inventory pricing report.'],  
-     'PS7' : ['Print the receipts detail report.','Print the cash receipts journal.','Print the cash deposit slip.','Print the transaction detail report.','Print the sales register and profit commission report.','Print the sales journal.','Print the layaway transactions report.','Print the rental transactions report.',"Print the special customer pricing report.","Print the special inventory pricing report."],
-		};	  
+		  'GL10' : ['Print the trial balance.','Print the account detail report.','Print the general journal.','Print the balance sheet.','Print the income statement.','Print the worksheet.','Print the chart of accounts.','Print the general ledger monthly account balances.','Print selected journals and audit trail.'],
+          'AR11' : ['Print the customer master listing.','Print the customer accounts receivable ledger.','Print the aged accounts receivable report.','Print receivable collection report.','Print the sales register and profit commission report.','Print the sales journal.','Print the cash receipts journal.','Print the cash deposit slip.','Print the sales analysis reports.','Print the annual sales figures.','Print the customer memo and client contact reports.','Print labels.'],  
+          'AP9'  : ['Print the vendor master listing.','Print the accounts payable report.','Print the aged accounts payable report.','Print the discount availability report.','Print the purchase journal.','Print the cash disbursements journal.','Print the cheque register.','Print the purchase analysis report.','Print the annual purchases report.','Print the vendor memo and supplier contact report.','Print vendor labels'],
+          'PO6'  : ['Print the inventory stock level report.','Print the purchase order detail report.','Print the outstanding orders report.','Print the expediting report.','Print the accrued accounts payable report.','Print the orders receiving report.','Print the purchase price variance report.','Print the Order Guide.',"Print the purchase journal.","Print purchase analysis by vendor."],
+          'JC9'  : ['Print job master listing.','Print labour report.','Print work detail report.','Print materials and services report.','Print purchases report.','Print job ledger report.','Print work in progress report.','Print job invoices report.','Print profitability report.','Print overview report.','Print shop orders base on estimates.','Estimate performance report menu.'],
+          'IV11' : ['Print the sales orders booked report.','Print the outstanding sales orders report.','Print the quotation report.','Print the shipping schedule.','Print the Order Guide.','Print the sales register and profit commission report.','Print the special customer pricing report.','Print the special inventory pricing report.'],  
+          'PS7'  : ['Print the receipts detail report.','Print the cash receipts journal.','Print the cash deposit slip.','Print the transaction detail report.','Print the sales register and profit commission report.','Print the sales journal.','Print the layaway transactions report.','Print the rental transactions report.',"Print the special customer pricing report.","Print the special inventory pricing report."],    
+          'PR1'  : ['Add, update or delete employees.','Update employee earnings and deductions','Update employee year to date amounts','Display insurable earnings.'],    
+          'PR2'  : ['Add, update or delete time tickets.','Print time tickets register.','Post time tickets.'],    
+          'PR3'  : ['Generate pay transactions.','Add, update or delete pay transactions.','Print pay transactions register.','Process payroll.','Print wage journal.','Print cheque register.','Transfer payroll to bank.'],              
+          'PR7'  : ['Print employee master listing.','Print employee phone list.','Print employee year to date report.','Print earnings and deductions history report.','Print employee wage review.','Print overtime report.','Print attendance report.','Print seniority report.','Print employee memo report.'],
+          'PT9'  : ['Print job master listing.','Print labour report.','Print work detail report.','Print materials and services report.','Print purchases report.','Print job ledger report.','Print work in progress report.','Print job invoices report.','Print profitability report.','Print overview report.','Print shop orders base on estimates.','Estimate performance report menu.'],
+          'CB9'  : ['Print job master listing.','Print labour report.','Print work detail report.','Print materials and services report.','Print purchases report.','Print job ledger report.','Print work in progress report.','Print job invoices report.','Print profitability report.','Print overview report.','Print shop orders base on estimates.','Estimate performance report menu.'],
+         'IN12'  : ['Print a product listing.','Print product price list.','Print inventory valuation report.','Print inventory stock level report.','Sales analysis reports menu.','Print ABC stratification','Print lot usage report.','Print product warehouse and pricing labels.','Print the product memo report.'],                   
+		 };	  
 		
 var L3 = {
-	        'IV101' : ['AAAA','BBBB','CCCC'],
-			'IV111' : ['YYYY','QQQQ','XXXX']
+	        'JC912' : ['Print job and quotation estimates.','Print cost variance report.','Print performance report.','Print overage report.'],
+	        'PT912' : ['Print job and quotation estimates.','Print cost variance report.','Print performance report.','Print overage report.'],
+	        'CB912' : ['Print job and quotation estimates.','Print cost variance report.','Print performance report.','Print overage report.'],
          };			  
 $(function(){
 
