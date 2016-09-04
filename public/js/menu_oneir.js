@@ -92,7 +92,7 @@ function template(item,id,code)
 					 // LEVEL3
 				      if(L3[code+(i+1)+''+(k+1)] != null)
 			         {	 
-		                 temp += subMenuHeader(code+(i+1)+''+(k+1)+'x',code+(i+1)+''+(k+1),L2[code][k],code);
+		                 temp += subMenuHeader(code+(i+1)+''+(k+1)+'x',code+(i+1)+''+(k+1),L2[code+(i+1)][k],code+(i+1));
                          temp += subMenuDiv(code+(i+1)+''+(k+1));		 		 
 			            for(var b = 0,xxlen = L3[code+(i+1)+''+(k+1)].length; b < xxlen; b++)
 			           {
