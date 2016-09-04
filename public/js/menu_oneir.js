@@ -82,15 +82,28 @@ function template(item,id,code)
 	 {
          for(var i = 0,len = L1[code].length; i < len; i++)
          {
-			 // if submenu has submenu
+			 // LEVEL2
 			 if(L2[code+(i+1)] != null)
 			 {	 
 		         temp += subMenuHeader(code+(i+1)+'x',code+(i+1),L1[code][i],code);
                  temp += subMenuDiv(code+(i+1));		 		 
 			     for(var k = 0,xlen = L2[code+(i+1)].length; k < xlen; k++)
 			    {
-				     temp += addNewsubMenuOption(code+(i+1)+''+k,L2[code+(i+1)][k],code+(i+1));
-					
+					 // LEVEL3
+				      if(L3[code+(i+1)+''+(k+1)] != null)
+			         {	 
+		                 temp += subMenuHeader(code+(i+1)+''+(k+1)+'x',code+(i+1)+''+(k+1),L2[code][k],code);
+                         temp += subMenuDiv(code+(i+1)+''+(k+1));		 		 
+			            for(var b = 0,xxlen = L3[code+(i+1)+''+(k+1)].length; b < xxlen; b++)
+			           {
+				            temp += addNewsubMenuOption(code+(i+1)+''+(k+1)+''+(b+1),L3[code+(i+1)+''+(k+1)][b],code+(i+1)+''+(k+1),' ---');
+			           }
+			           temp += endofCascadingItemsBlock();
+                    }
+			        else
+			       {
+				       temp += addNewsubMenuOption(code+(i+1)+''+(k+1),L2[code+(i+1)][k],code+(i+1),' --');
+			       }
 			    }
 			     temp += endofCascadingItemsBlock();
              }
@@ -118,9 +131,9 @@ function addNewMenuOption(id,item,dataparent)
 {
 	return "<a id=\""+ id + "\" href=\"#\" class=\"list-group-item\" data-parent=\"#"+dataparent+"\">"+item+"</a>";
 }
-function addNewsubMenuOption(id,item,dataparent)
+function addNewsubMenuOption(id,item,dataparent,layer)
 {
-	return "<a id=\""+ id + "\" href=\"#\" class=\"list-group-item\" data-parent=\"#"+dataparent+"\">"+' --'+item+"</a>";
+	return "<a id=\""+ id + "\" href=\"#\" class=\"list-group-item\" data-parent=\"#"+dataparent+"\">"+layer+item+"</a>";
 }
 /*****
 * Helper functions for adding Menu Items and Levels
@@ -261,11 +274,11 @@ function OnClickTab()
     });
 }
 
+// To be Deleted after testing
+/*
 function eventListenersForAllLevels(code)
 {
-        /*
-		** Binding event handlers to Level 2 & 3
-	    */
+        
 		var telnetCorrespondence = ['0','A','B','C','D','E','F']; 
         for(var g = 0; g < code.length-1; g++)
         {
@@ -282,8 +295,61 @@ function eventListenersForAllLevels(code)
 				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
 							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
 							if( (k+1) > 9 ) level3 = telnetCorrespondence[(i+1)%10];
-									 bindEventListeners('#'+code[g]+(i+1)+''+(k+1),level1+','+level2+','+sessionId,level3);
+							bindEventListeners('#'+code[g]+(i+1)+''+(k+1),level1+','+level2+','+sessionId,level3);
 			           }
+                    }
+			        else
+			        {
+							var level1 = (g+1), level2 = (i+1);   
+				            if( (g+1) > 9 ) m1 = telnetCorrespondence[(g+1)%10];
+							if( (i+1) > 9 ) m1 = telnetCorrespondence[(i+1)%10];
+							bindEventListeners('#'+code[g]+(i+1),level1+','+level2+','+sessionId);
+			        }
+	             }
+	        }
+        }
+}
+*/
+function eventListenersForAllLevels(code)
+{
+        //
+		//Binding event handlers to Level 2 & 3
+	    //
+		var telnetCorrespondence = ['0','A','B','C','D','E','F']; 
+        for(var g = 0; g < code.length-1; g++)
+        {
+            if( L1[code[g]] != null)
+	        {
+                for(var i = 0,len = L1[code[g]].length; i < len; i++)
+                {
+			        // if submenu has submenu
+			        if(L2[code[g]+(i+1)] != null)
+			        {	 	 		 
+			            for(var k = 0,xlen = L2[code+(i+1)].length; k < xlen; k++)
+			           {
+							if(L3[code+(i+1)+''+(k+1)] != null)
+			               {	 
+		                      temp += subMenuHeader(code+(i+1)+''+(k+1)+'x',code+(i+1)+''+(k+1),L2[code][k],code);
+                              temp += subMenuDiv(code+(i+1)+''+(k+1));		 		 
+			                 for(var b = 0,xxlen = L3[code+(i+1)+''+(k+1)].length; b < xxlen; b++)
+			                {
+				                 temp += addNewsubMenuOption(code+(i+1)+''+(k+1)+''+(b+1),L3[code+(i+1)+''+(k+1)][b],code+(i+1)+''+(k+1));
+								 var level1 = (g+1), level2 = (i+1),level3 = (k+1),level4;   
+				                 if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
+							     if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
+							     if( (k+1) > 9 ) level3 = telnetCorrespondence[(i+1)%10];
+							      bindEventListeners('#'+code[g]+(i+1)+''+(k+1)+''+(b+1),level1+','+level2+','+sessionId+','+level3+','+level4);
+			                }
+                           }
+			               else
+			              {
+                            var level1 = (g+1), level2 = (i+1),level3 = (k+1);   
+				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
+							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
+							if( (k+1) > 9 ) level3 = telnetCorrespondence[(i+1)%10];
+							bindEventListeners('#'+code[g]+(i+1)+''+(k+1),level1+','+level2+','+sessionId+','+level3);
+			              }
+			          }
                     }
 			        else
 			        {
