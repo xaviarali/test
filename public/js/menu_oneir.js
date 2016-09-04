@@ -325,19 +325,17 @@ function eventListenersForAllLevels(code)
 			        // if submenu has submenu
 			        if(L2[code[g]+(i+1)] != null)
 			        {	 	 		 
-			            for(var k = 0,xlen = L2[code+(i+1)].length; k < xlen; k++)
+			            for(var k = 0,xlen = L2[code[g]+(i+1)].length; k < xlen; k++)
 			           {
-							if(L3[code+(i+1)+''+(k+1)] != null)
+							if(L3[code[g]+(i+1)+''+(k+1)] != null)
 			               {	 
-		                      temp += subMenuHeader(code+(i+1)+''+(k+1)+'x',code+(i+1)+''+(k+1),L2[code][k],code);
-                              temp += subMenuDiv(code+(i+1)+''+(k+1));		 		 
-			                 for(var b = 0,xxlen = L3[code+(i+1)+''+(k+1)].length; b < xxlen; b++)
+			                 for(var b = 0,xxlen = L3[code[g]+(i+1)+''+(k+1)].length; b < xxlen; b++)
 			                {
-				                 temp += addNewsubMenuOption(code+(i+1)+''+(k+1)+''+(b+1),L3[code+(i+1)+''+(k+1)][b],code+(i+1)+''+(k+1));
-								 var level1 = (g+1), level2 = (i+1),level3 = (k+1),level4;   
+								 var level1 = (g+1), level2 = (i+1),level3 = (k+1),level4 = (b+1);   
 				                 if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
 							     if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
 							     if( (k+1) > 9 ) level3 = telnetCorrespondence[(i+1)%10];
+								 if( (b+1) > 9 ) level4 = telnetCorrespondence[(b+1)%10];
 							      bindEventListeners('#'+code[g]+(i+1)+''+(k+1)+''+(b+1),level1+','+level2+','+sessionId+','+level3+','+level4);
 			                }
                            }
