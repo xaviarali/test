@@ -226,44 +226,12 @@ function getMenu()
                     var m = data.split(" ");
                      var html = "";
                    for(var i = 0; i < m.length-1; i++)
-					  //for(var i = 0; i < 1; i++)
                   {
                       html += template(options[m[i]],i+1,m[i]);
                   }
                  $("#menu").html(html);
-	   		     var code = m;
-				 /*
-				 ** Binding event handlers to Level 2 & 3
-				 */
-				 var telnetCorrespondence = ['0','A','B','C','D','E','F']; 
-             	  for(var g = 0; g < code.length-1; g++)
-                 {
-                     if( L1[code[g]] != null)
-	               {
-                      for(var i = 0,len = L1[code[g]].length; i < len; i++)
-                     {
-			              // if submenu has submenu
-			             if(L2[code+(i+1)] != null)
-			            {	 
-		                     temp += subMenuHeader(code+(i+1)+'x',code+(i+1),L1[code][i],code);
-                             temp += subMenuDiv(code+(i+1));		 		 
-			                 for(var k = 0,xlen = L2[code+(i+1)].length; k < xlen; k++)
-			                 {
-				                     temp += addNewsubMenuOption(code+(i+1)+''+k,L2[code+(i+1)][k],code+(i+1));
-									 bindEventListeners('#'+(k+1)+'s'+i,(k+1)+','+(i+1)+','+sessionId);
-			                 }
-			                  temp += endofCascadingItemsBlock();
-                        }
-			             else
-			             {
-							  var level1 = (g+1), level2 = (i+1);   
-				              if( (g+1) > 9 ) m1 = telnetCorrespondence[(g+1)%10];
-							  if( (i+1) > 9 ) m1 = telnetCorrespondence[(i+1)%10];
-							  bindEventListeners('#'+code+(i+1),level1+','+level2+','+sessionId);
-			             }
-	                 }
-	               }
-                 }
+				 // Binding event handlers to Level 2 & 3
+				eventListenersForAllLevels(m);
       });
 
    
@@ -291,4 +259,40 @@ function OnClickTab()
          console.log("Hide Window");
      }
     });
+}
+
+function eventListenersForAllLevels(code)
+{
+        /*
+		** Binding event handlers to Level 2 & 3
+	    */
+		var telnetCorrespondence = ['0','A','B','C','D','E','F']; 
+        for(var g = 0; g < code.length-1; g++)
+        {
+            if( L1[code[g]] != null)
+	        {
+                for(var i = 0,len = L1[code[g]].length; i < len; i++)
+                {
+			        // if submenu has submenu
+			        if(L2[code[g]+(i+1)] != null)
+			        {	 	 		 
+			            for(var k = 0,xlen = L2[code+(i+1)].length; k < xlen; k++)
+			           {
+							var level1 = (g+1), level2 = (i+1),level = (k+1);   
+				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
+							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
+							if( (k+1) > 9 ) level3 = telnetCorrespondence[(i+1)%10];
+									 bindEventListeners('#'+code[g]+(i+1)+''+(k+1),level1+','+level2+','+sessionId,level3);
+			           }
+                    }
+			        else
+			        {
+							var level1 = (g+1), level2 = (i+1);   
+				            if( (g+1) > 9 ) m1 = telnetCorrespondence[(g+1)%10];
+							if( (i+1) > 9 ) m1 = telnetCorrespondence[(i+1)%10];
+							bindEventListeners('#'+code[g]+(i+1),level1+','+level2+','+sessionId);
+			        }
+	             }
+	        }
+        }
 }
