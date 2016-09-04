@@ -334,7 +334,7 @@ function eventListenersForAllLevels(code)
 								 var level1 = (g+1), level2 = (i+1),level3 = (k+1),level4 = (b+1);   
 				                 if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
 							     if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
-							     if( (k+1) > 9 ) level3 = telnetCorrespondence[(i+1)%10];
+							     if( (k+1) > 9 ) level3 = telnetCorrespondence[(k+1)%10];
 								 if( (b+1) > 9 ) level4 = telnetCorrespondence[(b+1)%10];
 							      bindEventListeners('#'+code[g]+(i+1)+''+(k+1)+''+(b+1),level1+','+level2+','+sessionId+','+level3+','+level4);
 			                }
@@ -344,7 +344,7 @@ function eventListenersForAllLevels(code)
                             var level1 = (g+1), level2 = (i+1),level3 = (k+1);   
 				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
 							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
-							if( (k+1) > 9 ) level3 = telnetCorrespondence[(i+1)%10];
+							if( (k+1) > 9 ) level3 = telnetCorrespondence[(k+1)%10];
 							bindEventListeners('#'+code[g]+(i+1)+''+(k+1),level1+','+level2+','+sessionId+','+level3);
 			              }
 			          }
