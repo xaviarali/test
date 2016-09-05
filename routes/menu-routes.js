@@ -21,7 +21,7 @@ exports.oneir_commands = function(req,res){
         };
 
 exports.oneir = function(req,res,next){
-           var temp = 0;
+           var temp = 'W';
            if(req.query.q != null && storage[req.query.q] != null)
            { 
               temp = storage[req.query.q];
