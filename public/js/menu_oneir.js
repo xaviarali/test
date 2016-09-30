@@ -347,14 +347,27 @@ function OnClickTab()
 	document.addEventListener("visibilitychange", function() {
        if(document.visibilityState === 'hidden')
       {
+<<<<<<< HEAD
 		// $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionId},function(d){});
         // console.log("Hide Window");
+=======
+		 $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionId},function(d){});
+         console.log("Hide Window");
+>>>>>>> 67583c578bc1e9210603aa2658123975f962b0dd
       }
        else
 		   if(document.visibilityState === 'visible')
      {
+<<<<<<< HEAD
 		   $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionStorage.getItem("tabId")},function(d){});
 		   console.log("Show Window");
+=======
+		// $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionId},function(d){});
+		 $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionId},function(d){});
+		 $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionId},function(d){});
+		 $.get("oneir_commands",{ 'q' : "M" + ",0," + sessionId},function(d){});
+         console.log("Show Window");
+>>>>>>> 67583c578bc1e9210603aa2658123975f962b0dd
      }
     });
 	
@@ -408,7 +421,11 @@ function eventListenersForAllLevels(code)
 							var level1 = (g+1), level2 = (i+1);   
 				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
 							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
+<<<<<<< HEAD
 							bindEventListeners('#'+code[g]+(i+1),level1+','+level2,code[g]);
+=======
+							bindEventListeners('#'+code[g]+(i+1),level1+','+level2+','+sessionId+','+code[g]);
+>>>>>>> 67583c578bc1e9210603aa2658123975f962b0dd
 			        }
 	             }
 	        }
