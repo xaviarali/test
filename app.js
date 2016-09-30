@@ -64,6 +64,7 @@ app.get('/setCompany',menu_routes.setCompany);
 app.get('/getCompany',menu_routes.getCompany);
 app.get('/getMenu',menu_routes.getMenu);
 app.get('/ms',menu_routes.getCmps);
+app.get('/getTabId',menu_routes.getTabId);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

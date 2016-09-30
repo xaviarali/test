@@ -80,10 +80,8 @@ void modules(char* user_id, char* company_folder)
         // General Ledger
          if(toupper(temp.c[23]) == 'Y'){ // purchased = purchased + "GL"
         // printf("GL\n"); 
-          strcat(purchased,"GL");
-           //purschases
-           
-          }
+          strcat(purchased,"GL");                      
+         }
         // Accounts Receivable 
         if(toupper(temp.c[24]) == 'Y'){ // purchased = purchased + "AR"
            // printf("AR\n"); 
@@ -197,11 +195,14 @@ void modules(char* user_id, char* company_folder)
          else
              if(toupper(mbuffer[0]) =='G' && toupper(mbuffer[1])=='L')
                strcat(allowed,"GL");
+         else
+             if(toupper(mbuffer[0]) =='P' && toupper(mbuffer[1])=='O')
+               strcat(allowed,"PO");
       }
    } 
    else
    {
-        strcat(allowed,"IVRBPSARINSAJCBMAPPRGL");
+        strcat(allowed,"IVRBPSARINSAJCBMAPPRGLPO");
    }
    char final[100]; 
    finalMenu(purchased,allowed,final);

@@ -8,6 +8,7 @@
     <!-- Library -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
     <!-- Custom CSS -->
     <link href="css/custom.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -23,47 +24,33 @@
                 <a class="inbox-avatar" href="javascript:void(0);">
                     <img width="60" height="60" src="img/logo.jpg">
                 </a>
-                <div class="user-name">
-                    <h5>Oneir Solutions Inc</h5>
-                </div>
+            <div class="user-name">
+                <h5>Oneir Solutions Inc</h5>
             </div>
-            <ul class="inbox-nav inbox-divider">
-                <li class="active">
-                    <a href="#"><i class="fa fa-building-o"></i> Manage Companies</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-reorder"></i> Manage Orders <span class="label label-danger pull-right">2</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-list-alt"></i>Manage Products</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-money"></i> Manage Payments</a>
-                </li>
-            </ul>
-            <ul class="nav nav-pills nav-stacked labels-info inbox-divider">
-                <li><a href="#"> <i class=" fa fa-gear"></i> Settings </a></li>
-                </li>
-            </ul>
+            <div class="inbox-head">
+               <div id="company-name"></div>
+                  <div class="user-profile-link">
+                     <li class="dropdown">
+                        <a href="Javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"
+                           data-devgib="tagged">
+                           <span id="userName"></span>
+                           <img src="img/avatar.png" alt="Profile picture">
+                           <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                           <li><a href="Javascript:void(0)" data-devgib="tagged" id="logout">Log Out</a></li>
+                        </ul>
+                     </li>
+                  </div>
+               </div>
+			   <div id="companies"></div>
+            </div>            
             <ul id="menu" class="inbox-nav inbox-divider"></ul>
 			<ul id="inven_app" class="inbox-nav inbox-divider"></ul>
         </aside>
         <aside class="lg-side">
             <div class="inbox-head">
-                <div id="company-name"></div>
-                <div class="user-profile-link">
-                    <li class="dropdown">
-                        <a href="Javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"
-                           data-devgib="tagged">
-                            <span id="userName"></span>
-                            <img src="img/avatar.png" alt="Profile picture">
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="Javascript:void(0)" data-devgib="tagged" id="logout">Log Out</a></li>
-                        </ul>
-                    </li>
-                </div>
+                <div id="company-name"></div>                
             </div>
             <!--Block of markup for each loop. i.e Company names !-->
             <script id="companyListTemplate" type="text/x-handlebars-template">
@@ -84,43 +71,11 @@
     </div>
 </div>
 
-<div id="companyLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createCompanyPasswordLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                <h3 id="createAgentLabel">Enter Company Password</h3>
-            </div>
-            <div class="modal-body ">
-                <div class="alert alert-danger error hideme"></div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="wrap">
-                            <form class="col-md-10 col-md-offset-1 login" id="companyPasswordForm">
-                                <div class="alert alert-success"></div>
-                                <div class="alert alert-danger"></div>
-                                <input type="text" class="form-control" id="companyName"
-                                       name="companyName" readonly value="">
-                                <label for="companyName" rel="tooltip" title="Company Name"></label>
-                                <input type="password" placeholder="Company password" class="form-control" id="password"
-                                       name="companyPassword" required>
-
-                                <label for="password" rel="tooltip" title="Password"></label>
-                                <input type="submit" value="Save" class="btn btn-primary btn-lg"/>
-                                <div class="clearfix"></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-select.js"></script>
 <script src="js/handlebars.js"></script>
 <script src="js/master.js"></script>
 <script src="js/home.js"></script>

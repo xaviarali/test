@@ -186,7 +186,7 @@ $(document).ready(function () {
             if (password.match(confirmPassword)) {
                 $.ajax({
                     type: 'POST',
-                    url: apiUrl + "users",
+                    url: "/api/users",
                     data: JSON.stringify(formData),
                     timeout: 6000,
                     contentType: 'application/json',

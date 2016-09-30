@@ -35,12 +35,16 @@ $(document).ready(function () {
                      and then redirect.
                      */
                     var username = $("#username").val();
-                    $("#username").attr("disabled","disabled");
-                    $("#mheading").html(username + ",Please select your company:");
+
+                    // $("#username").attr("disabled","disabled");
+                    // $("#mheading").html(username + ",Please select your company:");
+
                     $("#passdiv").hide();
                     $("#reme").hide();
+
                     $("#sbutton").val("Continue");
                     $(document).on('click','#sbutton',function(e){
+
                              console.log($('#cs').find(':selected').val());
                             e.preventDefault();
                             $.get('/setCompany',{'compid':$('#cs').find(':selected').val(),'compname':$('#cs').find(':selected').text()},function(){
@@ -48,10 +52,12 @@ $(document).ready(function () {
 
                               });      
                            // window.location.href = "index.html";
+
                     });
+
                     $.get("/ms",function(data){
                            var array = data.split(",");
-                          var html = "<select id=\"cs\">";
+                          var html = "<select class=\"form-control selectpicker\" id=\"cs\">";
                          for(var i =0; i<array.length;i++)
                          {
                              var cmp = array[i].split("#");
@@ -59,6 +65,7 @@ $(document).ready(function () {
                          }
                           html = html + "</select>";
                         $("#moptions").html(html);
+						$('.selectpicker').selectpicker();
                        
                     });
                     

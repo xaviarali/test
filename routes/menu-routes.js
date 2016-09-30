@@ -17,7 +17,7 @@ exports.login_check = function(req,res,next){
 exports.oneir_commands = function(req,res){
           // if(req.query.q && req.session.me) 
               storage[req.session.username] = req.query.q;  
-              res.end('sdsd');    
+              res.end(req.query.q);    
         };
 
 exports.oneir = function(req,res,next){
@@ -68,4 +68,11 @@ exports.getCmps = function(req,res,next){
        
        res.json(output);
    });
+};
+
+exports.getTabId = function(req,res,next){
+   
+      var val = req.session.tab_id;
+	  res.json({ 'tab_id' :  val});
+      res.end();
 };

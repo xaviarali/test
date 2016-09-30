@@ -1,4 +1,6 @@
 var sessionId = -1;
+// $('#IV11').collapse('toggle');
+//$(menuToBeColl).collapse({"toggle": true, 'parent': menuToBeColl});
 var options = {
                'GL' : 'General Ledger','AR' : 'Accounts Receivable','AP' : 'Accounts Payable', 'PO' : 'Purchase Order','JC':'Manufacturing Job Shop','IV':'Sales Order & Invoicing','PS':'Point of Sale','PR':'Payroll & Personnel Management','BM':'Bill of Materials',
                'SA' : 'Advanced Sales Analysis', 'PT' :'Professional Time Billing','CB':'Construction Billing','RB':'Repetitive Billing',         
@@ -16,7 +18,7 @@ var L1 = {
           'PS' : ["Make sales.", "Print clerk 'X' and grand 'Z' totals", "Remove posted point of sale invoices", "Special customer pricing table", "Special inventory pricing table.", "Point of sale utilities menu.", "Point of sale reports."],
 		  'PR' : ["Employee menu.","Time tickets menu.","Payroll processing menu.","Print payroll cheques.","Year end processing menu.","Payroll utilities menu.","Payroll reports."],
 	      'BM' : ["Add, update or delete bill of materials.","Add, update or delete schedule.","One step production.","Materials requirements planning.","Go to the bill of materials utilities menu.","Print the bill of materials listing.","Print shop orders.","Print production planning report.","Print bill of materials job listing."],
-          'SA' : ["Print Inventory Transaction Report.", "Print Sales Analysis by Product.", "Print Sales Analysis by Product Line.", "Print Sales Analysis by Customer.", "Print Sales Analysis by Territory.","Print Sales Analysis by Salesrep.","Print Sales Analysis by Supplier.","Print Sales Analysis with Year Comparisons.","Print Inventory List Price Change Report.","Purge Sales Analysis History","Sales History Data Mining.","Velocity Report."],
+          'SA' : ["Print Inventory Transaction Report.", "  .", "Print Sales Analysis by Product Line.", "Print Sales Analysis by Customer.", "Print Sales Analysis by Territory.","Print Sales Analysis by Salesrep.","Print Sales Analysis by Supplier.","Print Sales Analysis with Year Comparisons.","Print Inventory List Price Change Report.","Purge Sales Analysis History","Sales History Data Mining.","Velocity Report."],
  		  'PT' : ["Add, update or delete jobs.","Charge labour to jobs.","Charge materials to jobs.","Adjust job purchases.","Display and invoice jobs.","Credit jobs.","Print invoices.","Job utility menu.","Job reports."], 
 	      'CB' : ["Add, update or delete jobs.","Charge labour to jobs.","Charge materials to jobs.","Adjust job purchases.","Display and invoice jobs.","Credit jobs.","Print invoices.","Job utility menu.","Job reports."], 
 	      'RB' : ["Add, update or delete contracts.", "Enter meter readings.", "Process billing cycle.", "Print repetitive billing invoices.", "Print proformae invoices.", "Enter extra billings.", "Set up contract types.", "Remove cancelled contracts.", "Print contract listing.", "Print usage follow up sheet."],
@@ -53,20 +55,53 @@ $(function(){
 		{
 		    console.log("Menu Script is not working");
 		}
-		else
+		else 
 		{
-		      getBrowserTabId();
+			           sessStorageInit();
+		               setTabid();  
                       //events();
                      // menu();
-                      getCompany();
-                      getMenu();
-                      inventoryApp();
-                      OnClickTab();					  
+                       getCompany();
+					   setTitleBar('');
+                       getMenu();
+                       inventoryApp();
+                       OnClickTab();
+					   userCompanies();
+                       exitTelnetBeforeLeaving();						   
 		}
 	},"json");
     
        
     }); 
+	
+	function setTabid()
+	{
+		if(!sessionStorage.getItem('tabId'))
+		{
+			getBrowserTabId();
+		}
+	}
+	
+	function sessStorageInit()
+	{
+		if(sessionStorage.getItem('tracking'))
+		{
+			var menuToBeColl = sessionStorage.getItem('menuSelected');
+			 sessionStorage.clear();
+			 sessionStorage.setItem('menuSelected', menuToBeColl);
+			 sessionStorage.setItem("telnet98",'1');
+		}
+	}
+	
+	function setTitleBar(item)
+	{
+		 $.get('/getCompany',function(data){ 
+                    if(data){
+                        if(item === '') document.title = '['+data.compname+']';
+                        else            document.title = '['+data.compname.substring(0, 3)+'CO]'+ item;
+					}
+					   },"json")	
+	}
 //
 // START OF MENU LEVELS ADDING FUNCTIONS
 // 
@@ -196,7 +231,12 @@ function menu()
 function getBrowserTabId()
 {
 	$.get("/browser_tab_id",function(data){
-		sessionId = data.tab_id; //alert("sesId:"+sessionId);
+		sessionId = data.tab_id; 
+		if(sessionStorage)
+		{
+			sessionStorage.setItem("tabId",data.tab_id);
+			sessionStorage.setItem("temp",data.tab_id);
+		}
 	},"json");
 }
 
@@ -216,12 +256,20 @@ function inventoryApp()
 	                      });
 		$(document).on('click',"#sw", function(e){
                  e.preventDefault();  
-                 $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionId},function(d){});
+                 $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionStorage.getItem("tabId")},function(d){});
 	                      });
 		$(document).on('click',"#hw", function(e){
                  e.preventDefault();  
-                $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionId},function(d){});
+                $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionStorage.getItem("tabId")},function(d){});
 	                      });
+					
+		$(document).on('click','#go_cmp',function(e){
+                            e.preventDefault();
+                            $.get('/setCompany',{'compid':$('#cs').find(':selected').val(),'compname':$('#cs').find(':selected').text()},function(){
+                                     window.location.href = "index.html";
+                              });      
+                           // window.location.href = "index.html";
+                    });
    
 }
 
@@ -245,17 +293,53 @@ function getMenu()
                  $("#menu").html(html);
 				 // Binding event handlers to Level 2 & 3
 				eventListenersForAllLevels(m);
+				if(sessionStorage.getItem('menuSelected'))
+				{
+					$((sessionStorage.getItem('menuSelected')).substring(0, 3)).collapse('toggle');
+					setTitleBar($(sessionStorage.getItem('menuSelected')).html());
+					console.log(sessionStorage.getItem('menuSelected'));
+					sessionStorage.removeItem('menuSelected');
+				}
       });
 
    
 }
 
-function bindEventListeners(id,para)
+
+function bindEventListeners(id,para1,para2)
 {
 		 $(document).on('click',id, function(e){
-                 e.preventDefault();  
-                 $.get("oneir_commands",{ 'q' : para },function(d){});
-            });
+                 e.preventDefault();
+				 sessionStorage.setItem('menuSelected',id);
+                 if(sessionStorage. getItem("telnet98") === '1')
+	             {
+		             $.get("/getTabId",function(data){ 
+		             sessionStorage.setItem('tabId',data.tab_id + 1);
+					     $.get("oneir_commands",{ 'q' : para1+','+data.tab_id+','+para2 },function(d){
+					 
+				     	      sessionStorage.setItem("telnet98",'1');
+  				              sessionStorage.removeItem('tabId');
+				              sessionStorage.setItem("tabId",sessionStorage.getItem("temp"));
+				              sessionStorage.removeItem('tracking');
+				              console.log(sessionStorage.getItem("tabId"));
+				          });
+	                   },"json");
+					sessionStorage.setItem('tracking','1');
+			        window.open('/','_blank');
+	             }
+                  else
+				 {			 
+                    $.get("oneir_commands",{ 'q' : para1+','+sessionStorage.getItem('tabId')+','+para2 },function(d){ 
+					     sessionStorage.setItem("telnet98",'1');
+  				         sessionStorage.removeItem('tabId');
+				         sessionStorage.setItem("tabId",sessionStorage.getItem("temp"));
+				         sessionStorage.removeItem('tracking');
+				         console.log(sessionStorage.getItem("tabId"));
+				     });
+					 setTitleBar($(id).html());
+				 }
+				 console.log($(id).html()); 
+          });
 }
 
 function OnClickTab()
@@ -263,53 +347,23 @@ function OnClickTab()
 	document.addEventListener("visibilitychange", function() {
        if(document.visibilityState === 'hidden')
       {
-		 $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionId},function(d){});
-         console.log("Show Window");
+		// $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionId},function(d){});
+        // console.log("Hide Window");
       }
-       else if(document.visibilityState === 'visible')
+       else
+		   if(document.visibilityState === 'visible')
      {
-		 $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionId},function(d){});
-         console.log("Hide Window");
+		   $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionStorage.getItem("tabId")},function(d){});
+		   console.log("Show Window");
      }
     });
+	
+	$(document).on('click','#logout', function(e){
+		sessionStorage.clear();
+		console.log('Session Storage Cleared.');
+	});
 }
 
-// To be Deleted after testing
-/*
-function eventListenersForAllLevels(code)
-{
-        
-		var telnetCorrespondence = ['0','A','B','C','D','E','F']; 
-        for(var g = 0; g < code.length-1; g++)
-        {
-            if( L1[code[g]] != null)
-	        {
-                for(var i = 0,len = L1[code[g]].length; i < len; i++)
-                {
-			        // if submenu has submenu
-			        if(L2[code[g]+(i+1)] != null)
-			        {	 	 		 
-			            for(var k = 0,xlen = L2[code+(i+1)].length; k < xlen; k++)
-			           {
-							var level1 = (g+1), level2 = (i+1),level = (k+1);   
-				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
-							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
-							if( (k+1) > 9 ) level3 = telnetCorrespondence[(i+1)%10];
-							bindEventListeners('#'+code[g]+(i+1)+''+(k+1),level1+','+level2+','+sessionId,level3);
-			           }
-                    }
-			        else
-			        {
-							var level1 = (g+1), level2 = (i+1);   
-				            if( (g+1) > 9 ) m1 = telnetCorrespondence[(g+1)%10];
-							if( (i+1) > 9 ) m1 = telnetCorrespondence[(i+1)%10];
-							bindEventListeners('#'+code[g]+(i+1),level1+','+level2+','+sessionId);
-			        }
-	             }
-	        }
-        }
-}
-*/
 function eventListenersForAllLevels(code)
 {
         //
@@ -336,7 +390,7 @@ function eventListenersForAllLevels(code)
 							     if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
 							     if( (k+1) > 9 ) level3 = telnetCorrespondence[(k+1)%10];
 								 if( (b+1) > 9 ) level4 = telnetCorrespondence[(b+1)%10];                                
-							      bindEventListeners('#'+code[g]+(i+1)+''+(k+1)+''+(b+1),level1+','+level2+','+sessionId+','+code[g]+','+level3+','+level4);
+							      bindEventListeners('#'+code[g]+(i+1)+''+(k+1)+''+(b+1),level1+','+level2,code[g]+','+level3+','+level4);
 			                }
                            }
 			               else
@@ -345,18 +399,42 @@ function eventListenersForAllLevels(code)
 				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
 							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
 							if( (k+1) > 9 ) level3 = telnetCorrespondence[(k+1)%10];
-							bindEventListeners('#'+code[g]+(i+1)+''+(k+1),level1+','+level2+','+sessionId+','+code[g]+','+level3);
+							bindEventListeners('#'+code[g]+(i+1)+''+(k+1),level1+','+level2,code[g]+','+level3);
 			              }
 			          }
                     }
 			        else
 			        {
 							var level1 = (g+1), level2 = (i+1);   
-				            if( (g+1) > 9 ) m1 = telnetCorrespondence[(g+1)%10];
-							if( (i+1) > 9 ) m1 = telnetCorrespondence[(i+1)%10];
-							bindEventListeners('#'+code[g]+(i+1),level1+','+level2+','+sessionId+','+code[g]);
+				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
+							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
+							bindEventListeners('#'+code[g]+(i+1),level1+','+level2,code[g]);
 			        }
 	             }
 	        }
         }
+}
+
+function exitTelnetBeforeLeaving()
+{
+	window.onbeforeunload = function(){
+		  $.get("oneir_commands",{ 'q' : "x" + ",0," + sessionStorage.getItem("tabId")},function(d){});
+	};
+}
+
+function userCompanies()
+{
+	$.get("/ms",function(data){
+                           var array = data.split(",");
+                          var html = "<select class=\"selectpicker\" id=\"cs\">";
+                         for(var i =0; i<array.length;i++)
+                         {
+                             var cmp = array[i].split("#");
+                             html = html + "<option value=\""+cmp[1]+"\" >"+cmp[0]+"</option>";
+                         }
+                          html = html + "</select>";
+                          html += "<button id=\'go_cmp\'type='\button'\ class='\btn'\>Go</button>";
+						 $("#companies").html(html);
+						 $('.selectpicker').selectpicker();
+                    });
 }
