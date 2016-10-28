@@ -13,6 +13,7 @@ $(document).ready(function () {
             url: "/login",
             data: JSON.stringify(formData),
             timeout: 6000,
+			async: false,
             contentType: 'application/json',
             dataType: 'json',
             success: function (userData) {
@@ -39,10 +40,12 @@ $(document).ready(function () {
                     // $("#username").attr("disabled","disabled");
                     // $("#mheading").html(username + ",Please select your company:");
 
-                    $("#passdiv").hide();
-                    $("#reme").hide();
+                    //$("#passdiv").hide();
+                    //$("#reme").hide();
+                    // $("#.btn.dropdown-toggle").hide();
 
-                    $("#sbutton").val("Continue");
+
+                    //$("#sbutton").val("Continue");
                     $(document).on('click','#sbutton',function(e){
 
                              console.log($('#cs').find(':selected').val());
@@ -55,23 +58,41 @@ $(document).ready(function () {
 
                     });
 
-                    $.get("/ms",function(data){
+					/*
+					   $.get("/ms",function(data){
                            var array = data.split(",");
                           var html = "<select class=\"form-control selectpicker\" id=\"cs\">";
                          for(var i =0; i<array.length;i++)
                          {
                              var cmp = array[i].split("#");
                              html = html + "<option value=\""+cmp[1]+"\" >"+cmp[0]+"</option>";
+							 $.get('/setCompany',{'compid':cmp[1],'compname':cmp[0]},function(){
+                                     window.location.href = "index.html";
+                              });
                          }
                           html = html + "</select>";
                         $("#moptions").html(html);
 						$('.selectpicker').selectpicker();
-                       
+                        
                     });
-                    
+					*/
                     localStorage.clear();
                     localStorage.setItem('userData', JSON.stringify(userData));
                    // window.location.href = "index.html"
+				   $.get("/ms",function(data){
+                           var array = JSON.parse(data);
+						   if(data!==''){
+                              for(var i =0; i<array.length;i++)
+                             {
+							     $.get('/setCompany',{'compid':array[i].companyCode,'compname':array[i].companyName},function(){
+                                        //window.location.href = "index.html";
+										window.open("index.html",'_target');
+										$('body').html('');
+                                  });
+							     break;
+							 }
+                           }
+                    });
                 }
 
             },

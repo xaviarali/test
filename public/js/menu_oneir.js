@@ -59,15 +59,21 @@ $(function(){
 		{
 			           sessStorageInit();
 		               setTabid();  
-                      //events();
-                     // menu();
+                       //events();
+                       // menu();
+					   openCompanyInNewTab();
                        getCompany();
-					   setTitleBar('');
+					   getTelnetID();
                        getMenu();
+					   setTitleBar('');
                        inventoryApp();
+					   //otherApps();
                        OnClickTab();
 					   userCompanies();
-                       exitTelnetBeforeLeaving();						   
+					   userDivisions();
+					   setDateTime();
+					   exitTelnetBeforeLeaving();
+                       var intervalID = window.setInterval(listenForBrowserTabClosure, 2000);						   
 		}
 	},"json");
     
@@ -81,26 +87,59 @@ $(function(){
 			getBrowserTabId();
 		}
 	}
-	
+	function sleep(milliseconds) {
+       var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+       if ((new Date().getTime() - start) > milliseconds){
+          break;
+       }
+      }
+    }
 	function sessStorageInit()
 	{
 		if(sessionStorage.getItem('tracking'))
 		{
 			var menuToBeColl = sessionStorage.getItem('menuSelected');
+			var company = sessionStorage.getItem('company');
+			var company_name =sessionStorage.getItem('company-name');
 			 sessionStorage.clear();
 			 sessionStorage.setItem('menuSelected', menuToBeColl);
 			 sessionStorage.setItem("telnet98",'1');
+			 
+			sessionStorage.setItem('company',company);
+		    sessionStorage.setItem('company-name',company_name);
+		}
+		else if(sessionStorage.getItem('tab_company'))
+		{
+			var company = sessionStorage.getItem('tab_company');
+			var company_name =sessionStorage.getItem('tab_company-name');
+			
+			sessionStorage.clear();
+			sessionStorage.setItem("telnet98",'1');
+			sessionStorage.setItem('company',company);
+		    sessionStorage.setItem('company-name',company_name);
+			
 		}
 	}
 	
 	function setTitleBar(item)
 	{
-		 $.get('/getCompany',function(data){ 
-                    if(data){
+	
+     if(!sessionStorage.getItem('company-name'))
+	{
+       $.get('/getCompany',function(data){ 
+                if(data){
                         if(item === '') document.title = '['+data.compname+']';
                         else            document.title = '['+data.compname.substring(0, 3)+'CO]'+ item;
 					}
-					   },"json")	
+					   },"json");
+	}
+	else 
+	{
+		var data = sessionStorage.getItem('company-name');
+        if(item === '') document.title = '['+data+']';
+        else            document.title = '['+data.substring(0, 3)+'CO]'+ item;
+	}
 	}
 //
 // START OF MENU LEVELS ADDING FUNCTIONS
@@ -242,17 +281,15 @@ function getBrowserTabId()
 
 function inventoryApp()
 {
-    $("#inven_app").html( ""+xtemplate("Show Window","sw")+xtemplate("Hide Window","hw") + xtemplate("Ar Customers","inven_na") + xtemplate("Inventory","inven_table"));
+    $("#inven_app").html( ""+xtemplate("Show Window","sw")+xtemplate("Hide Window","hw") + xtemplate("Customers","inven_na") + xtemplate("Products","inven_table"));
     
 	    $(document).on('click',"#inven_na", function(e){
                  e.preventDefault();  
-                 window.open('/users','Ar Customers',
-                             'width=900,height=500,resizable,status=0,top=150,left=380'
-                             );
+                 window.open('/users','Customers','width=1350,height=500,resizable,status=0,top=100,left=50');				 
 	                      });
         $(document).on('click',"#inven_table", function(e){
                  e.preventDefault();  
-                 window.open('/inventory','Inventory','width=900,height=500,resizable,status=0,top=150,left=380');
+                 window.open('/inventory','Inventory','width=1450,height=500,resizable,status=0,top=100,left=20');
 	                      });
 		$(document).on('click',"#sw", function(e){
                  e.preventDefault();  
@@ -263,27 +300,80 @@ function inventoryApp()
                 $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionStorage.getItem("tabId")},function(d){});
 	                      });
 					
-		$(document).on('click','#go_cmp',function(e){
-                            e.preventDefault();
-                            $.get('/setCompany',{'compid':$('#cs').find(':selected').val(),'compname':$('#cs').find(':selected').text()},function(){
-                                     window.location.href = "index.html";
-                              });      
-                           // window.location.href = "index.html";
-                    });
+}
+
+function otherApps()
+{
+    $("#other_apps").html( ""+xtemplate("Show Window","sw")+xtemplate("Hide Window","hw") + xtemplate("Customers","artable") + xtemplate("Products","intable"));
+    
+	    $(document).on('click',"#artable", function(e){
+                 e.preventDefault();  
+                 window.open('/customers','Customers',
+                             'width=900,height=500,resizable,status=0,top=150,left=380'
+                             );
+	                      });
+        $(document).on('click',"#intable", function(e){
+                 e.preventDefault();  
+                 window.open('/products','Products','width=900,height=500,resizable,status=0,top=150,left=380');
+	                      });
+		$(document).on('click',"#sw", function(e){
+                 e.preventDefault();  
+                 $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionStorage.getItem("tabId")},function(d){});
+	                      });
+		$(document).on('click',"#hw", function(e){
+                 e.preventDefault();  
+                $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionStorage.getItem("tabId")},function(d){});
+	                      });
    
+}
+
+function openCompanyInNewTab()
+{
+	$(document).on('click','#go_cmp',function(e){
+                            e.preventDefault();
+                                
+                           // window.location.href = "index.html";
+						      sessionStorage.setItem('tab_company',$('#cs').find(':selected').val());
+				     	      sessionStorage.setItem('tab_company-name',$('#cs').find(':selected').text());
+				              console.log(sessionStorage.getItem("tabId"));
+		  	                  window.open('/','_blank');
+							  sleep(2000);
+							  sessionStorage.removeItem('tab_company');
+			                  sessionStorage.removeItem('tab_company-name');
+                    });
 }
 
 function getCompany()
 {
-    $.get('/getCompany',function(data){ 
+	if(!sessionStorage.getItem('company-name'))
+	{
+       $.get('/getCompany',function(data){ 
+               if(data){
+                 $('#company-name').html(data.compname);
+                 sessionStorage.setItem('company-name',data);
+			           }
+					   },"json");
+	}
+	else 
+	{
+		$('#company-name').html(sessionStorage.getItem('company-name'));
+	}
+}
+
+function getTelnetID()
+{
+    $.get('/getTelnetID',function(data){ 
              if(data)
-             $('#company-name').html(data.compname);
+             $('#TelnetID').html("Telnet-ID:"+data.TelnetID);
                        },"json");
 }
 
 function getMenu()
 {
-   $.get('/getMenu',function(data){
+	if(sessionStorage.getItem('company'))
+     $.get('/setCompany',{'compid':sessionStorage.getItem('company'),'compname':sessionStorage.getItem('company-name')},function(){});      
+	
+     $.get('/getMenu',function(data){
                     var m = data.split(" ");
                      var html = "";
                    for(var i = 0; i < m.length-1; i++)
@@ -347,27 +437,14 @@ function OnClickTab()
 	document.addEventListener("visibilitychange", function() {
        if(document.visibilityState === 'hidden')
       {
-<<<<<<< HEAD
-		// $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionId},function(d){});
+		$.get("setHideWindow",{ 'q' : "h" + ",0," + sessionId},function(d){});
         // console.log("Hide Window");
-=======
-		 $.get("oneir_commands",{ 'q' : "h" + ",0," + sessionId},function(d){});
-         console.log("Hide Window");
->>>>>>> 67583c578bc1e9210603aa2658123975f962b0dd
       }
        else
 		   if(document.visibilityState === 'visible')
      {
-<<<<<<< HEAD
 		   $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionStorage.getItem("tabId")},function(d){});
 		   console.log("Show Window");
-=======
-		// $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionId},function(d){});
-		 $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionId},function(d){});
-		 $.get("oneir_commands",{ 'q' : "m" + ",0," + sessionId},function(d){});
-		 $.get("oneir_commands",{ 'q' : "M" + ",0," + sessionId},function(d){});
-         console.log("Show Window");
->>>>>>> 67583c578bc1e9210603aa2658123975f962b0dd
      }
     });
 	
@@ -421,11 +498,7 @@ function eventListenersForAllLevels(code)
 							var level1 = (g+1), level2 = (i+1);   
 				            if( (g+1) > 9 ) level1 = telnetCorrespondence[(g+1)%10];
 							if( (i+1) > 9 ) level2 = telnetCorrespondence[(i+1)%10];
-<<<<<<< HEAD
 							bindEventListeners('#'+code[g]+(i+1),level1+','+level2,code[g]);
-=======
-							bindEventListeners('#'+code[g]+(i+1),level1+','+level2+','+sessionId+','+code[g]);
->>>>>>> 67583c578bc1e9210603aa2658123975f962b0dd
 			        }
 	             }
 	        }
@@ -435,23 +508,78 @@ function eventListenersForAllLevels(code)
 function exitTelnetBeforeLeaving()
 {
 	window.onbeforeunload = function(){
-		  $.get("oneir_commands",{ 'q' : "x" + ",0," + sessionStorage.getItem("tabId")},function(d){});
+		   //sleep((750*parseInt(sessionStorage.getItem("tabId"))));
+                   $.get("oneir_commands",{ 'q' : "x" + ",0," + sessionStorage.getItem("tabId")},function(d){});
+                   console.log("First Closure Sent");
+                    sleep(2000);
+                   $.get("setHideWindow",{ 'q' : "x" + ",0," + sessionStorage.getItem("tabId")},function(d){});
+                   console.log("Second Closure Sent");
 	};
 }
 
 function userCompanies()
 {
 	$.get("/ms",function(data){
-                           var array = data.split(",");
-                          var html = "<select class=\"selectpicker\" id=\"cs\">";
+                           var array = JSON.parse(data);
+                          var html = "<select class=\"selectpicker\" id=\"cs\" data-width=\"auto\">";
                          for(var i =0; i<array.length;i++)
                          {
-                             var cmp = array[i].split("#");
-                             html = html + "<option value=\""+cmp[1]+"\" >"+cmp[0]+"</option>";
+                             html = html + "<option value=\""+array[i].companyCode+"\" >"+array[i].companyName+"</option>";
+							 if(i === 0)
+							 {
+								 if(!sessionStorage.getItem('company'))
+								 {
+									 sessionStorage.setItem('company',array[i].companyCode);
+									 sessionStorage.setItem('company-name',array[i].companyName);
+									 sessionStorage.setItem('company-colors',array[i].companyColors);
+								 }
+							 }
                          }
                           html = html + "</select>";
                           html += "<button id=\'go_cmp\'type='\button'\ class='\btn'\>Go</button>";
 						 $("#companies").html(html);
 						 $('.selectpicker').selectpicker();
                     });
+}
+
+function listenForBrowserTabClosure() {
+  // request
+$.get('/getBrowserClosureTabID',{'tabId':sessionStorage.getItem("tabId")},function(data){
+	  if(data.tabId !== 'W')
+	  {
+		  window.close();
+	  }
+  });
+}
+
+function userDivisions()
+{
+	$.get("/ms",function(data){
+                         var array = JSON.parse(data);
+                         var html = "<select class=\"selectpicker\" id=\"dievs\" data-width=\"auto\">";						 					  
+						  
+                         for(var i =0; i<array.length;i++)
+                         {
+							 html +=  "<optgroup label=\""+array[i].companyName+"\">";
+							 
+							 for(var j =0; j<array[i].divCodes.length;j++)
+                             html += "<option value=\""+array[i].divCodes[j]+"\" >"+array[i].divCodes[j]+"-"+array[i].divNames[j]+"   "+array[i].pcCodes[j]+"-"+array[i].pcNames[j]+"</option>";
+						     
+							 html += "</optgroup>";
+                         }
+                          html = html + "</select>";
+                          html += "<button id=\'go_divs\'type='\button'\ class='\btn'\>Go</button>";
+						 $("#divisions").html(html);
+						 $('.selectpicker').selectpicker();
+                    });
+}
+
+function setDateTime()
+{
+	var currentdate = new Date();
+	$('#date').html(currentdate);
+	$( "#datepicker" ).datepicker();
+	$("#datepickerDiv").html("<div class=\"form-group\"><input class=\"form-control\"  type=\"text\" id=\"datepicker\" readonly=\"readonly\" placeholder=\"Telnet Date\"/></div>");
+    $("#datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+
 }

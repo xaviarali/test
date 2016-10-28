@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  a(href='/def/arcusts.format.txt') Binary format definition( parsing instruction)
-  h1 arcusts.rnd
+  a(href='/def/arcusts.format.txt') Fields
+  h1 Customers
 
   if data
      div.data
        p.
-        Showing parsed data from <b>"arcusts.rnd"</b> file
+        data from <b>"arcusts.rnd"</b> file
        table
          tr(class='head')
            each val, index in data[0]

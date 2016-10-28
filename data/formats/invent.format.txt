@@ -1,12 +1,12 @@
 256
-cvt 12 productCode
+cvt 12 ProductCode
 cvt 2 Division
-cvt 35 productDescription
+cvt 35 ProductDescription
 cvt 3 ProductLine
 cvt 2 UOMDescription
 cvs 4 Committed
 cvt 12 SubstitutedBy
-cvd 8 retailPrice
+cvd 8 RetailPrice
 cvd 8 PriceLevel_1
 cvs 4 QtyBreak_1
 cvd 8 PriceLevel_2

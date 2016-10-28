@@ -1,12 +1,12 @@
 384
-cvt 6 shipToCode
-cvt 6 billToCode
-cvt 30 customerName
-cvt 30 address1
-cvt 30 address2
-cvt 30 address3
-cvt 14 postalCode
-cvt 14 phoneNumber
+cvt 6 ShipToCode
+cvt 6 BillToCode
+cvt 30 CustomerName
+cvt 30 Address1
+cvt 30 Address2
+cvt 30 Address3
+cvt 14 PostalCode
+cvt 14 PhoneNumber
 cvt 3
 cvt 30
 cvt 3

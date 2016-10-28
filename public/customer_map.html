@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Google Maps JavaScript API v3 Example: Map Simple</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta charset="utf-8" />
+        <style>html, body, #map_canvas {margin: 0;padding: 0;height: 100%;}</style>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhjvV56oNJe-AzcdWjwzY5aAVfzH892f8 &v=3.exp&sensor=false"></script>
+		
+        <script>
+            var map;			
+			var oneir = new google.maps.LatLng(43.164818, -79.057455);
+            var jon = new google.maps.LatLng(43.726681, -79.414019); 
+            var raj = new google.maps.LatLng(43.582301, -79.682728);
+			var frank = new google.maps.LatLng(43.595028, -79.654478);
+			
+			
+            function initialize() {
+                var mapOptions = {
+                    zoom: 9,
+                    center: oneir,										
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };				
+                map = new google.maps.Map(document.getElementById('map_canvas'),mapOptions);
+				
+                var marker = new google.maps.Marker({position:oneir,animation:google.maps.Animation.BOUNCE});  
+				marker.setMap(map);				
+			    var marker = new google.maps.Marker({position:jon});  
+				marker.setMap(map);		
+				var marker = new google.maps.Marker({position:raj});
+                marker.setMap(map);
+				var marker = new google.maps.Marker({position:frank});
+                marker.setMap(map);
+			}
+
+            google.maps.event.addDomListener(window, 'load', initialize);							
+        </script>
+		
+    </head>
+    
+    <body>
+        <div id="map_canvas"></div>
+    </body>
+
+</html>

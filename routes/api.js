@@ -1,4 +1,4 @@
-/**
+ /**
  * Created by Aman on 24.06.16.
  */
 
@@ -60,9 +60,20 @@ exports.login = function(req, res, next) {
             res.status(400).send(err)
             return;
         }
+		if (typeof localStorage === "undefined" || localStorage === null) {
+          var LocalStorage = require('node-localstorage').LocalStorage;
+          localStorage = new LocalStorage('./telnetID');
+         }
+		 if(!localStorage.getItem(req.body["username"]))
+		 {
+			 res.status(400).send("TelnetID is not Set.");
+            return;
+		 }
+		 
         req.session.me = user;
         req.session.username = req.body["username"];
         req.session.tab_id = 1;
+		req.session.telnetId = localStorage.getItem(req.body["username"]);
         res.status(200).send({"token":uuid.v4(), "user":user});
     });
 };

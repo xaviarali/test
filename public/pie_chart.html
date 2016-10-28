@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<script type="text/javascript">
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		theme: "theme2",
+		title:{
+			text: "Tutorial Company Sales 2016"
+		},
+		data: [
+		{
+			type: "pie",
+			showInLegend: true,
+			toolTipContent: "{y} - #percent %",
+			yValueFormatString: "#0.#,,. Million",
+			legendText: "{indexLabel}",
+			dataPoints: [
+				{  y: 4181563, indexLabel: "Mens Bicycle"},
+				{  y: 2175498, indexLabel: "Womens Bicycle"},
+				{  y: 3125844, indexLabel: "Mens Racing"},
+				{  y: 1176121, indexLabel: "Womens Racing"},
+				{  y: 1727161, indexLabel: "Accessories" },
+				{  y: 4303364, indexLabel: "Spare parts"},
+				{  y: 1717786, indexLabel: "Labor repairs"}
+			]
+		}
+		]
+	});
+	chart.render();
+}
+	</script>
+	<script src="js/canvasjs.min.js"></script>
+	<title>Pie Chart Example</title>
+</head>
+<body>
+	<div id="chartContainer" style="height: 800px; width: 100%;"></div>
+</body>
+</html>

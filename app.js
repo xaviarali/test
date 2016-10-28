@@ -11,6 +11,9 @@ var cp = require('child_process');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var inventory = require('./routes/inventory');
+var customers = require('./routes/customers');
+var products = require('./routes/products');
+
 var api = require('./routes/api');
 var menu_routes = require('./routes/menu-routes.js');
 var api_users = require('./routes/api/users');
@@ -47,6 +50,11 @@ app.all('/api/users*', function (req, res, next) {
 app.use('/', routes);
 app.use('/users', users);
 app.use('/inventory', inventory);
+app.use('/customers', customers);
+app.use('/products', products);
+
+
+
 //app.use('/api', api);
 app.use('/api/users', api_users);
 
@@ -65,6 +73,13 @@ app.get('/getCompany',menu_routes.getCompany);
 app.get('/getMenu',menu_routes.getMenu);
 app.get('/ms',menu_routes.getCmps);
 app.get('/getTabId',menu_routes.getTabId);
+app.get('/getHideWindow',menu_routes.getHideWindow);
+app.get('/setHideWindow',menu_routes.setHideWindow);
+app.get('/setTelnetID',menu_routes.setTelnetID);
+app.get('/getTelnetID',menu_routes.getTelnetID);
+
+app.get('/getBrowserClosureTabID',menu_routes.getBrowserClosureTabID);
+app.get('/setBrowserClosureTabID',menu_routes.setBrowserClosureTabID);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to DevDec Demo
+
+  a(href='customers') arcusts.rnd
+  br
+  a(href='products') inventho.rnd

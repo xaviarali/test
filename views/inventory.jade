@@ -2,29 +2,27 @@ extends layout
 
 
 block content
-  a(href='/def/invent.format.txt') Binary format definition( parsing instruction)
-  h1 inventho.rnd
-
-  hr
-  p= "Calculated sum of 'Retail Price' using Python as extension: " + total
+  a(href='/def/invent.format.txt') Fields
+  h1 Products
+   
   hr
   if data
      div.data
-       p Showing parsed data from <b>"inventho.rnd"</b> file
+       p data from <b>"inventho.rnd"</b> file:
          br
        table
          tr(class='head')
-          td(width='400px')= "Update"
+          td(width='250px')= "Update Retail Price"
            each val, index in data[0]
-            td(width='400px')= index
+            td(width='250px')= index
           - var cls = 'even'
           - var index = 1
           each row in data
             tr(class= cls)
-              td(width='400px')
+              td(width='250px')
                 a(href='/inventory/detail/' +index) Edit
               each val, index in row
-                td(width='400px')= val
+                td(width='250px')= val
 
             - index++
             if cls== 'even'
