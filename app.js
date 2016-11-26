@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
 var sha256 = require('sha256');
 var cp = require('child_process');   
-  
+
+var LevelStore = require('level-session-store')(session);
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var inventory = require('./routes/inventory');
@@ -22,7 +24,8 @@ var app = express();
 app.set('trust proxy', 1); // trust first proxy
 app.use(cookieSession({
   name: 'session',
-  keys: ['8BitKey#1!', 'ThisIsAnotherKey#2!']
+  keys: ['8BitKey#1!', 'ThisIsAnotherKey#2!'],
+  store: new LevelStore()
 }));
 
 // view engine setup
@@ -80,7 +83,12 @@ app.get('/getTelnetID',menu_routes.getTelnetID);
 
 app.get('/getBrowserClosureTabID',menu_routes.getBrowserClosureTabID);
 app.get('/setBrowserClosureTabID',menu_routes.setBrowserClosureTabID);
+app.get('/getFFP',menu_routes.getFlatFilePermission);
+app.get('/getMFP',menu_routes.getModulesFP);
 
+ app.get('/getCurUsers',function(req,res,next){
+	   
+ });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

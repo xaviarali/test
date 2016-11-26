@@ -49,11 +49,16 @@ var L3 = {
 	        'CB912' : ['Print job and quotation estimates.','Print cost variance report.','Print performance report.','Print overage report.'],
          };			  
 $(function(){
-
+ 
+       $.get("getTelnetID",function(data){
+		      if(!data.TelnetID)
+				  window.location.href = "login.html";
+	      },"json");
        $.get("login_check",function(data){ 
 		if(data.id==0)
 		{
 		    console.log("Menu Script is not working");
+			 window.location.href = "login.html";
 		}
 		else 
 		{
@@ -77,7 +82,6 @@ $(function(){
 		}
 	},"json");
     
-       
     }); 
 	
 	function setTabid()

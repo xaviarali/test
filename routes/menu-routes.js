@@ -7,6 +7,7 @@
 var express = require('express');
 var router = express.Router();
 var cp = require('child_process');
+var fs = require('fs');
 
 /* object for storing Telnet commands/instructions for all users */
 var storage = [];
@@ -201,4 +202,52 @@ exports.setBrowserClosureTabID = function(req,res){
 			 }			 
         };
 		
-		
+/*
+ * This request-handler user's company file's permission
+ * It returns an json object with key as 'access' and values as '1' or '0'
+ */	  
+exports.getFlatFilePermission = function(req,res){
+             fs.access('/var/oneir-cloud-try/services/FlatFileInterface/company_selection', fs.X_OK, function(err){
+                    if(err){
+						res.json({'access' : '0'});
+						return;
+					}
+					else
+					{
+						fs.access('/var/oneir-cloud-try/services/FlatFileInterface/menu_selection', fs.X_OK, function(err){
+						         if(err){
+					               	 res.json({'access' : '0'});
+					             }
+                                  else{
+									 res.json({'access' : '1'});  
+								  }								 
+						});
+				    }
+				 });
+        };		
+
+/*
+ * This request-handler checks whether the .modules.file exists for the user.
+ * It responds with json object
+ */	  
+exports.getModulesFP = function(req,res){
+             
+	   	  if(req.session.telnetId)
+	      {
+			   var path = '/var/vigilant/bin/.modules.'+req.session.telnetId;
+		       fs.stat(path, function(err, stats){
+                if (err || !stats.isFile()) {
+                   res.json({'access' : '0'});
+                   return;
+                } 
+				else
+				{
+				   res.json({'access' : '1'});
+				}
+			   });
+          }
+		  else
+		  {
+			   res.json({'access' : '-1'});
+		  }
+     };
